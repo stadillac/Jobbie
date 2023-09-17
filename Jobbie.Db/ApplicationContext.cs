@@ -1,27 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using Jobbie.Db.Models;
-using System.Data;
-using System.Diagnostics.Metrics;
-using System.Drawing;
-using System.Numerics;
-using System.Reflection.Emit;
-using System.Threading;
-using System.Transactions;
-using System;
+﻿using Jobbie.Db.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Jobbie.Db
 {
     public class ApplicationContext : DbContext
     {
-        private IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor? _httpContextAccessor;
 
-        public ApplicationContext()
-        {
-
-        }
+        public ApplicationContext() { }
 
         public ApplicationContext(IHttpContextAccessor httpContextAccessor)
         {
@@ -72,13 +60,13 @@ namespace Jobbie.Db
         private void OnBeforeSaving()
         {
             IEnumerable<EntityEntry> entries = ChangeTracker.Entries();
-            string userName = _httpContextAccessor.HttpContext.User.Identity.Name;
+            string userName = _httpContextAccessor?.HttpContext?.User?.Identity?.Name ?? "admin";
 
             foreach (var entry in entries)
             {
-                // for entities that inherit from AuditEntity,
+                // for entities that inherit from Audit,
                 // set fields appropriately
-                if (entry.Entity is AuditEntity trackable)
+                if (entry.Entity is Audit trackable)
                 {
                     switch (entry.State)
                     {

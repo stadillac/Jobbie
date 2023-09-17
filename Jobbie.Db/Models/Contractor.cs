@@ -2,13 +2,50 @@
 
 namespace Jobbie.Db.Models
 {
+    /// <summary>
+    /// The contractor model.
+    /// </summary>
+    /// <seealso cref="Jobbie.Db.Models.Audit" />
     public class Contractor : Audit
     {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
         public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the job type job subtype identifier.
+        /// </summary>
+        /// <value>
+        /// The job type job subtype identifier.
+        /// </value>
         public int JobTypeJobSubtypeId { get; set; }
 
+        /// <summary>
+        /// Navigational property. Gets or sets the job type job subtype.
+        /// </summary>
+        /// <value>
+        /// The job type job subtype.
+        /// </value>
         public virtual JobTypeJobSubtype JobTypeJobSubtype { get; set; } = new();
+
+        /// <summary>
+        /// Navigational property. Gets or sets the account.
+        /// </summary>
+        /// <value>
+        /// The account.
+        /// </value>
         public virtual Account Account { get; set; } = new();
+
+        /// <summary>
+        /// Navigational property. Gets or sets the licenses.
+        /// </summary>
+        /// <value>
+        /// The licenses.
+        /// </value>
         public virtual ICollection<License> Licenses { get; set; } = new Collection<License>();
     }
 }
