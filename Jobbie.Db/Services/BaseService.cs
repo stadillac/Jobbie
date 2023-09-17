@@ -1,9 +1,4 @@
 ﻿using Operations.Entity.EntityModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jobbie.Db.Services
 {
@@ -11,7 +6,7 @@ namespace Jobbie.Db.Services
     {
         protected ApplicationContext _context;
 
-        public BaseService(OperationsContext context)
+        public BaseService(ApplicationContext context)
         {
             _context = context;
         }
