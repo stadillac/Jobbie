@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
-using Operations.Entity.EntityModels;
+using Jobbie.Db.Models;
 using System.Data;
 using System.Diagnostics.Metrics;
 using System.Drawing;

@@ -1,4 +1,4 @@
-﻿namespace Operations.Entity.EntityModels
+﻿namespace Jobbie.Db.Models
 {
     public class JobTypeJobSubtype : Audit
     {
@@ -6,7 +6,7 @@
         public int JobTypeId { get; set; }
         public int JobSubtypeId { get; set; }
 
-        public JobType JobType { get; set; }
-        public JobSubtype JobSubtype { get; set; }
+        public virtual JobType JobType { get; set; } = new();
+        public virtual JobSubtype JobSubtype { get; set; } = new();
     }
 }
