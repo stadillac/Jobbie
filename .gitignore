@@ -1,2 +1,6 @@
 ﻿Jobbie.Web/.vs
 Jobbie.Web/Jobbie.Web.csproj.user
+Jobbie.Db/bin
+Jobbie.Db/obj
+Jobbie.Web/bin
+Jobbie.Web/obj
