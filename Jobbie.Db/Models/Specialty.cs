@@ -1,4 +1,6 @@
-﻿namespace Jobbie.Db.Models
+﻿using System.Collections.ObjectModel;
+
+namespace Jobbie.Db.Models
 {
     /// <summary>
     /// The specialty model. Represents any specialty

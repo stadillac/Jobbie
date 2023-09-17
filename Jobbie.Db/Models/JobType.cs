@@ -1,4 +1,6 @@
-﻿namespace Jobbie.Db.Models
+﻿using System.Collections.ObjectModel;
+
+namespace Jobbie.Db.Models
 {
     /// <summary>
     /// The job type model.
@@ -37,5 +39,14 @@
         ///   <c>true</c> if this instance has license; otherwise, <c>false</c>.
         /// </value>
         public bool HasLicense { get; set; }
+
+        /// <summary>
+        /// Navigational property. Gets or sets the job type job subtypes.
+        /// </summary>
+        /// <value>
+        /// The job type job subtypes.
+        /// </value>
+        public virtual ICollection<JobTypeJobSubtype> JobTypeJobSubtypes { get; set; } = new Collection<JobTypeJobSubtype>();
+
     }
 }

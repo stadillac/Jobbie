@@ -1,4 +1,5 @@
-﻿using Jobbie.Db.Models;
+﻿using Jobbie.Db.Extensions;
+using Jobbie.Db.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -35,14 +36,13 @@ namespace Jobbie.Db
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Server=ElliottBlair.tech;Database=OperationsDev;Trusted_Connection=False;UID=MicrosoftSucks;Password=Whydoesmicrosoftalwaystortureme?!?!?9766");
-            //optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=OperationsDev;Trusted_Connection=True;");
-            //Local connection string for Elliott
-            //optionsBuilder.UseSqlServer(@"Server=192.168.0.239,8765;Database=OperationsDev;Trusted_Connection=False;UID=MicrosoftSucks;Password=Whydoesmicrosoftalwaystortureme?!?!?9766");
-
-            //optionsBuilder.UseSqlServer(@"Server=tcp:sql-devqa-dev.database.windows.net,1433;Initial Catalog=sql-db-devqa-dev-db-project-aurora;Persist Security Info=False;User ID=ssadmin@leaffilter.com;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Authentication=""Active Directory Integrated"";");
-            //optionsBuilder.UseSqlServer(@"Server=tcp:sql-devqa-dev.database.windows.net,1433;Initial Catalog=sql-db-devqa-dev-db-project-aurora;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Authentication=""Active Directory Interactive"";");
+            // TODO: Set up connection string in appsettings
             optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=JobbieDb;Integrated Security=True;TrustServerCertificate=Yes");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.DefineRelationships();
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

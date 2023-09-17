@@ -1,4 +1,6 @@
-﻿namespace Jobbie.Db.Models
+﻿using System.Collections.ObjectModel;
+
+namespace Jobbie.Db.Models
 {
     /// <summary>
     /// The account model. An account must have a contractor related to it,
@@ -119,5 +121,13 @@
         /// The address.
         /// </value>
         public virtual Address Address { get; set; } = new();
+
+        /// <summary>
+        /// Navigational property. Gets or sets the documents.
+        /// </summary>
+        /// <value>
+        /// The documents.
+        /// </value>
+        public virtual ICollection<Document> Documents { get; set; } = new Collection<Document>();
     }
 }

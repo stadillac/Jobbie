@@ -1,4 +1,6 @@
-﻿namespace Jobbie.Db.Models
+﻿using System.Collections.ObjectModel;
+
+namespace Jobbie.Db.Models
 {
     /// <summary>
     /// The job sub type model.
@@ -29,5 +31,21 @@
         ///   <c>true</c> if this instance has specialty; otherwise, <c>false</c>.
         /// </value>
         public bool HasSpecialty { get; set; }
+
+        /// <summary>
+        /// Navigational property. Gets or sets the job type job subtypes.
+        /// </summary>
+        /// <value>
+        /// The job type job subtypes.
+        /// </value>
+        public virtual ICollection<JobTypeJobSubtype> JobTypeJobSubtypes { get; set; } = new Collection<JobTypeJobSubtype>();
+
+        /// <summary>
+        /// Navigational property. Gets or sets the specialties.
+        /// </summary>
+        /// <value>
+        /// The specialties.
+        /// </value>
+        public virtual ICollection<Specialty> Specialties { get; set; } = new Collection<Specialty>();
     }
 }

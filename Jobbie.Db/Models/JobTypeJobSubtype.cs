@@ -1,4 +1,6 @@
-﻿namespace Jobbie.Db.Models
+﻿using System.Collections.ObjectModel;
+
+namespace Jobbie.Db.Models
 {
     /// <summary>
     /// The job type job sub type model. Represents relationship between
@@ -46,5 +48,13 @@
         /// The job subtype.
         /// </value>
         public virtual JobSubtype JobSubtype { get; set; } = new();
+
+        /// <summary>
+        /// Navigational property. Gets or sets the contractors.
+        /// </summary>
+        /// <value>
+        /// The contractors.
+        /// </value>
+        public virtual ICollection<Contractor> Contractors { get; set; } = new Collection<Contractor>();
     }
 }

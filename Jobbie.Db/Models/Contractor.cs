@@ -47,5 +47,13 @@ namespace Jobbie.Db.Models
         /// The licenses.
         /// </value>
         public virtual ICollection<License> Licenses { get; set; } = new Collection<License>();
+
+        /// <summary>
+        /// Navigational property. Gets or sets the solicitations.
+        /// </summary>
+        /// <value>
+        /// The solicitations.
+        /// </value>
+        public virtual ICollection<SolicitationContractor> Solicitations { get; set; } = new Collection<SolicitationContractor>();
     }
 }

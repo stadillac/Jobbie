@@ -1,4 +1,6 @@
-﻿namespace Jobbie.Db.Models
+﻿using System.Collections.ObjectModel;
+
+namespace Jobbie.Db.Models
 {
     /// <summary>
     /// The solicitor model. Represents anyone posting a job.
@@ -29,5 +31,13 @@
         /// The account.
         /// </value>
         public virtual Account Account { get; set; } = new();
+
+        /// <summary>
+        /// Navigational property. Gets or sets the solicitations.
+        /// </summary>
+        /// <value>
+        /// The solicitations.
+        /// </value>
+        public virtual ICollection<Solicitation> Solicitations { get; set;} = new Collection<Solicitation>();
     }
 }

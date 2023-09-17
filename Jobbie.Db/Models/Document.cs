@@ -4,7 +4,7 @@
     /// The document model. Represents any uploaded
     /// document.
     /// </summary>
-    public class Document
+    public class Document : Audit
     {
         /// <summary>
         /// Gets or sets the identifier.
