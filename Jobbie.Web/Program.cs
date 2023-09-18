@@ -1,7 +1,12 @@
+using Jobbie.Db;
+using Jobbie.Web.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ApplicationContext>();
+builder.Services.RegisterServices();
 
 var app = builder.Build();
 
