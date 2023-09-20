@@ -1,6 +1,6 @@
 ﻿namespace Jobbie.Db.Models
 {
-    public class ContractorSoftware
+    public class ContractorSoftware : Audit
     {
         public int Id { get; set; }
         public int ContractorId { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jobbie.Db.Models
 {
-    public class SolicitationRole
+    public class SolicitationRole : Audit
     {
         public int Id { get; set; }
         public int SolicitationId { get; set; }
@@ -78,7 +78,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The required software.
         /// </value>
-        public virtual ICollection<SolicitationRoleSoftware> RequiredSoftware { get; set; } = new Collection<SolicitationRoleSoftware>();
+        public virtual ICollection<SolicitationRoleRequiredSoftware> RequiredSoftware { get; set; } = new Collection<SolicitationRoleRequiredSoftware>();
 
         /// <summary>
         /// Gets or sets the provided software for the role.
@@ -86,6 +86,6 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The provided software.
         /// </value>
-        public virtual ICollection<SolicitationRoleSoftware> ProvidedSoftware { get; set; } = new Collection<SolicitationRoleSoftware>();
+        public virtual ICollection<SolicitationRoleProvidedSoftware> ProvidedSoftware { get; set; } = new Collection<SolicitationRoleProvidedSoftware>();
     }
 }

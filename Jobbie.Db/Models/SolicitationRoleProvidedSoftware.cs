@@ -1,6 +1,6 @@
 ﻿namespace Jobbie.Db.Models
 {
-    public class SolicitationRoleSoftware
+    public class SolicitationRoleProvidedSoftware : Audit
     {
         public int Id { get; set; }
         public int SolicitationRoleId { get; set; }

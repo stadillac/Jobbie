@@ -1,6 +1,6 @@
 ﻿namespace Jobbie.Db.Models
 {
-    public class Software
+    public class Software : Audit
     {
         /// <summary>
         /// Gets or sets the identifier.

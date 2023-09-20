@@ -1,6 +1,6 @@
 ﻿namespace Jobbie.Db.Models
 {
-    public class ProjectDeliverable
+    public class ProjectDeliverable : Audit
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
