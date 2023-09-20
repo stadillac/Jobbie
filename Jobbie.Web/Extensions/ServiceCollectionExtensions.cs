@@ -7,16 +7,25 @@ namespace Jobbie.Web.Extensions
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IBankAccountService, BankAccountService>();
+            services.AddScoped<ICompanyTypeService, CompanyTypeService>();
             services.AddScoped<IContractorService, ContractorService>();
+            services.AddScoped<IContractorSoftwareService, ContractorSoftwareService>();
             services.AddScoped<IDeadlineTypeService, DeadlineTypeService>();
             services.AddScoped<IDocumentService, DocumentService>();
             services.AddScoped<IJobSubtypeService, JobSubtypeService>();
             services.AddScoped<IJobTypeJobSubtypeService, JobTypeJobSubtypeService>();
             services.AddScoped<IJobTypeService, JobTypeService>();
             services.AddScoped<ILicenseService, LicenseService>();
+            services.AddScoped<IProjectDeliverableService, ProjectDeliverableService>();
+            services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<ISoftwareService, SoftwareService>();
             services.AddScoped<ISolicitationContractorService, SolicitationContractorService>();
             services.AddScoped<ISolicitationDeadlineService, SolicitationDeadlineService>();
+            services.AddScoped<ISolicitationRoleProvidedSoftwareService, SolicitationRoleProvidedSoftwareService>();
+            services.AddScoped<ISolicitationRoleRequiredSoftwareService, SolicitationRoleRequiredSoftwareService>();
+            services.AddScoped<ISolicitationRoleService, SolicitationRoleService>();
             services.AddScoped<ISolicitationService, SolicitationService>();
             services.AddScoped<ISolicitorService, SolicitorService>();
             services.AddScoped<ISpecialtyService, SpecialtyService>();

@@ -18,8 +18,11 @@ namespace Jobbie.Db
         }
 
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<CompanyType> CompanyTypes { get; set; }
         public DbSet<Contractor> Contractors { get; set; }
+        public DbSet<ContractorSoftware> ContractorSoftware { get; set; }
         public DbSet<DeadlineType> DeadlineTypes { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<ErrorLog> ErrorLogs { get; set; }
@@ -27,9 +30,15 @@ namespace Jobbie.Db
         public DbSet<JobType> JobTypes { get; set; }
         public DbSet<JobTypeJobSubtype> JobTypeJobSubtypes { get; set; }
         public DbSet<License> Licenses { get; set; }
+        public DbSet<ProjectDeliverable> ProjectDeliverables { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Software> Software { get; set; }
         public DbSet<Solicitation> Solicitations { get; set; }
         public DbSet<SolicitationContractor> SolicitationContractors { get; set; }
         public DbSet<SolicitationDeadline> SolicitationDeadlines { get; set; }
+        public DbSet<SolicitationRole> SolicitationRoles { get; set; }
+        public DbSet<SolicitationRoleProvidedSoftware> SolicitationRoleProvidedSoftware { get; set; }
+        public DbSet<SolicitationRoleRequiredSoftware> SolicitationRoleRequiredSoftware { get; set; }
         public DbSet<Solicitor> Solicitors { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<State> States { get; set; }
