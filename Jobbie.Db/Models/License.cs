@@ -48,12 +48,20 @@
         public int Level { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is verified.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is verified; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsVerified { get; set; }
+
+        /// <summary>
         /// Gets or sets the government identifier.
         /// </summary>
         /// <value>
         /// The government identifier.
         /// </value>
-        public string GovernmentId { get; set; } = string.Empty;
+        public string LicenseNumber { get; set; } = string.Empty;
 
         /// <summary>
         /// Navigational property. Gets or sets the contractor.

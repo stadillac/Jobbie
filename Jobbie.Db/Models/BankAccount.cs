@@ -45,5 +45,13 @@
         /// The account number.
         /// </value>
         public string AccountNumber { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is verified.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is verified; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsVerified { get; set; }
     }
 }

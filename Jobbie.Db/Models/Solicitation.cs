@@ -1,4 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Data;
 
 namespace Jobbie.Db.Models
 {
@@ -33,22 +36,6 @@ namespace Jobbie.Db.Models
         public string Description { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the lump sum.
-        /// </summary>
-        /// <value>
-        /// The lump sum.
-        /// </value>
-        public decimal LumpSum { get; set; }
-
-        /// <summary>
-        /// Gets or sets the hourly rate.
-        /// </summary>
-        /// <value>
-        /// The hourly rate.
-        /// </value>
-        public decimal HourlyRate { get; set; }
-
-        /// <summary>
         /// Gets or sets a value indicating whether this instance is complete.
         /// </summary>
         /// <value>
@@ -73,6 +60,25 @@ namespace Jobbie.Db.Models
         public bool IsCancelled { get; set; }
 
         /// <summary>
+        /// Gets or sets the start date.
+        /// </summary>
+        /// <value>
+        /// The start date.
+        /// </value>
+        public DateTime StartDate { get; set; }
+        public string City { get; set; } = string.Empty;
+        public string County { get; set; } = string.Empty;
+        public string State { get; set; } = string.Empty;
+        public string SharedDriveUrl { get; set; } = string.Empty;
+        public DateTime EstimatedEndDate { get; set; }
+        public DateTime TeamMeetingDay { get; set;  }
+        public DateTime TeamMeetingTime { get; set; }
+
+        // TODO
+        //StatusUpdates<-blog style posts from Solicitor or Contractor(s)
+
+
+        /// <summary>
         /// Navigational property. Gets or sets the solicitor.
         /// </summary>
         /// <value>
@@ -95,5 +101,14 @@ namespace Jobbie.Db.Models
         /// The contractors.
         /// </value>
         public virtual ICollection<SolicitationContractor> Contractors { get; set; } = new Collection<SolicitationContractor>();
+
+        /// <summary>
+        /// Gets or sets the roles.
+        /// </summary>
+        /// <value>
+        /// The roles.
+        /// </value>
+        /// <remarks>The required roles for the solicitation.</remarks>
+        public virtual ICollection<SolicitationRole> Roles { get; set; } = new Collection<SolicitationRole>();
     }
 }

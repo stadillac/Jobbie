@@ -28,6 +28,17 @@ namespace Jobbie.Db.Extensions
                 .HasOne(x => x.BankAccount)
                 .WithOne()
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Account>()
+                .HasMany(x => x.ContractorReviews)
+                .WithOne(x => x.ContractorAccount)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Account>()
+                .HasMany(x => x.SolicitorReviews)
+                .WithOne(x => x.SolicitorAccount)
+                .OnDelete(DeleteBehavior.NoAction);
+
             #endregion
 
             #region Address
@@ -113,6 +124,15 @@ namespace Jobbie.Db.Extensions
             modelBuilder.Entity<SolicitationContractor>()
                 .HasOne(x => x.Contractor)
                 .WithMany(x => x.Solicitations)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            #endregion
+
+            #region SolicitationRole
+
+            modelBuilder.Entity<SolicitationRole>()
+                .HasMany(x => x.ProvidedSoftware)
+                .WithOne(x => x.SolicitationRole)
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion

@@ -55,6 +55,14 @@
         public string ZipCode { get; set; } = string.Empty;
 
         /// <summary>
+        /// Gets or sets the country.
+        /// </summary>
+        /// <value>
+        /// The country.
+        /// </value>
+        public string Country { get; set; } = "USA";
+
+        /// <summary>
         /// Navigational property. Gets or sets the state.
         /// </summary>
         /// <value>

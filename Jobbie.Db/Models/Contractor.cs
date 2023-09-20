@@ -55,5 +55,13 @@ namespace Jobbie.Db.Models
         /// The solicitations.
         /// </value>
         public virtual ICollection<SolicitationContractor> Solicitations { get; set; } = new Collection<SolicitationContractor>();
+
+        /// <summary>
+        /// Gets or sets the available software the contractor can use.
+        /// </summary>
+        /// <value>
+        /// The available software.
+        /// </value>
+        public virtual ICollection<Software> AvailableSoftware { get; set; } = new Collection<Software>();
     }
 }

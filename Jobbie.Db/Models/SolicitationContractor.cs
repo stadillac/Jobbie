@@ -32,6 +32,14 @@
         public int SolicitationId { get; set; }
 
         /// <summary>
+        /// Gets or sets the solicitation role identifier.
+        /// </summary>
+        /// <value>
+        /// The solicitation role identifier.
+        /// </value>
+        public int SolicitationRoleId { get; set; }
+
+        /// <summary>
         /// Navigational property. Gets or sets the contractor.
         /// </summary>
         /// <value>
@@ -46,5 +54,13 @@
         /// The solicitation.
         /// </value>
         public virtual Solicitation Solicitation { get; set; } = new();
+
+        /// <summary>
+        /// Navigational property. Gets or sets the solicitation role.
+        /// </summary>
+        /// <value>
+        /// The solicitation role.
+        /// </value>
+        public virtual SolicitationRole SolicitationRole { get; set; } = new();
     }
 }
