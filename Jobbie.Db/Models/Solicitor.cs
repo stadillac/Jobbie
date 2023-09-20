@@ -17,6 +17,14 @@ namespace Jobbie.Db.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the company type identifier.
+        /// </summary>
+        /// <value>
+        /// The company type identifier.
+        /// </value>
+        public int CompanyTypeId { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the company.
         /// </summary>
         /// <value>
@@ -31,6 +39,14 @@ namespace Jobbie.Db.Models
         /// The account.
         /// </value>
         public virtual Account Account { get; set; } = new();
+
+        /// <summary>
+        /// Navigational property. Gets or sets the type of the company.
+        /// </summary>
+        /// <value>
+        /// The type of the company.
+        /// </value>
+        public virtual CompanyType CompanyType { get; set; } = new();
 
         /// <summary>
         /// Navigational property. Gets or sets the solicitations.
