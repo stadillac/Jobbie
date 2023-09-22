@@ -1,5 +1,9 @@
 ﻿namespace Jobbie.Db.Models
 {
+    /// <summary>
+    /// The review model. 
+    /// </summary>
+    /// <seealso cref="Jobbie.Db.Models.Audit" />
     public class Review : Audit
     {
         /// <summary>
@@ -63,13 +67,19 @@
         public string Description { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the account.
+        /// Navigational property. Gets or sets the contractor account.
         /// </summary>
         /// <value>
         /// The account.
         /// </value>
         public virtual Account? ContractorAccount { get; set; }
 
+        /// <summary>
+        /// Navigational property. Gets or sets the solicitor account.
+        /// </summary>
+        /// <value>
+        /// The solicitor account.
+        /// </value>
         public virtual Account? SolicitorAccount { get; set; }
     }
 }

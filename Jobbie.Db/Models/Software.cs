@@ -27,12 +27,12 @@
         public bool IsSubscription { get; set; }
 
         /// <summary>
-        /// Gets or sets the subscription montly cost.
+        /// Gets or sets the subscription monthly cost.
         /// </summary>
         /// <value>
         /// The subscription montly cost.
         /// </value>
-        public double SubscriptionMontlyCost { get; set; }
+        public double SubscriptionMonthlyCost { get; set; }
 
         /// <summary>
         /// Gets or sets the initial purchase cost.

@@ -1,33 +1,128 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace Jobbie.Db.Models
 {
+    /// <summary>
+    /// The solicitation role model. Represents a specific role
+    /// for the job.
+    /// </summary>
+    /// <seealso cref="Jobbie.Db.Models.Audit" />
     public class SolicitationRole : Audit
     {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
         public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the solicitation identifier.
+        /// </summary>
+        /// <value>
+        /// The solicitation identifier.
+        /// </value>
         public int SolicitationId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the project deliverable identifier.
+        /// </summary>
+        /// <value>
+        /// The project deliverable identifier.
+        /// </value>
         public int ProjectDeliverableId  { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has contractor.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has contractor; otherwise, <c>false</c>.
+        /// </value>
+        /// <remarks>Marked true when contractor has been hired by solicitor.</remarks>
         public bool HasContractor { get; set; }
-            //<-this populates with the Contractor when hired by the Solicitor 
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is complete.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is complete; otherwise, <c>false</c>.
+        /// </value>
         public bool IsComplete { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is cancelled.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is cancelled; otherwise, <c>false</c>.
+        /// </value>
         public bool IsCancelled { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is approved.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is approved; otherwise, <c>false</c>.
+        /// </value>
         public bool IsApproved { get; set; }
-        public bool IsActive { get; set; } //<- (this is yes, when Solicitation is active and the Solicitor has activated the SolicitationRole) 
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is active.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is active; otherwise, <c>false</c>.
+        /// </value>
+        /// <remarks>This is true when Solicitation is active and the Solicitor has activated the SolicitationRole</remarks>
+        public bool IsActive { get; set; }
+
+        /// <summary>
+        /// Gets or sets the lump sum.
+        /// </summary>
+        /// <value>
+        /// The lump sum.
+        /// </value>
         public double LumpSum { get; set; }
+
+        /// <summary>
+        /// Gets or sets the hourly rate.
+        /// </summary>
+        /// <value>
+        /// The hourly rate.
+        /// </value>
         public double HourlyRate { get; set; }
-        public double SignBonus  { get; set; } //<- amount paid when contractor is hired for project. non-refundable. 
+
+        /// <summary>
+        /// Gets or sets the sign bonus.
+        /// </summary>
+        /// <value>
+        /// The sign bonus.
+        /// </value>
+        /// <remarks>Amount paid when contractor is hired for project. non-refundable.</remarks>
+        public double SignBonus  { get; set; }
+
+        /// <summary>
+        /// Gets or sets the workload.
+        /// </summary>
+        /// <value>
+        /// The workload.
+        /// </value>
+        /// <remarks>Amount of hours the role should take. Used to help estimate contractors available time.</remarks>
         public double Workload  { get; set; }
+
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        /// <value>
+        /// The description.
+        /// </value>
         public string Description { get; set; } = string.Empty;
-            //<-can be populated from existing table, can have multiple 
-        public int TechRequired  { get; set; }
-            //<-can be populated from existing table, can have multiple 
-        public int TechProvided  { get; set; }
-            //<-list of technology the solicitor can provide access to 
+
+        /// <summary>
+        /// Gets or sets the deliverable deadline.
+        /// </summary>
+        /// <value>
+        /// The deliverable deadline.
+        /// </value>
         public DateTime DeliverableDeadline  { get; set; }
 
         /// <summary>

@@ -62,6 +62,6 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The available software.
         /// </value>
-        public virtual ICollection<Software> AvailableSoftware { get; set; } = new Collection<Software>();
+        public virtual ICollection<ContractorSoftware> AvailableSoftware { get; set; } = new Collection<ContractorSoftware>();
     }
 }

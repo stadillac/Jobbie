@@ -31,6 +31,14 @@
         public int AccountId {get;set;}
 
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is verified.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is verified; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsVerified { get; set; }
+
+        /// <summary>
         /// Navigational property. Gets or sets the account.
         /// </summary>
         /// <value>

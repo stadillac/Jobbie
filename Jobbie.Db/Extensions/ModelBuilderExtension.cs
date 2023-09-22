@@ -30,6 +30,11 @@ namespace Jobbie.Db.Extensions
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Account>()
+                .HasOne(x => x.CompanyType)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Account>()
                 .HasMany(x => x.ContractorReviews)
                 .WithOne(x => x.ContractorAccount)
                 .OnDelete(DeleteBehavior.NoAction);
@@ -60,6 +65,20 @@ namespace Jobbie.Db.Extensions
             modelBuilder.Entity<Contractor>()
                 .HasMany(x => x.Licenses)
                 .WithOne(x => x.Contractor)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            #endregion
+
+            #region ContractorSoftware
+
+            modelBuilder.Entity<ContractorSoftware>()
+                .HasOne(x => x.Contractor)
+                .WithMany(x => x.AvailableSoftware)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ContractorSoftware>()
+                .HasOne(x => x.Software)
+                .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
@@ -100,6 +119,20 @@ namespace Jobbie.Db.Extensions
 
             #endregion
 
+            #region Review 
+
+            modelBuilder.Entity<Review>()
+                .HasOne(x => x.ContractorAccount) 
+                .WithMany(x => x.ContractorReviews)
+                .OnDelete(DeleteBehavior.NoAction);
+            
+            modelBuilder.Entity<Review>()
+                .HasOne(x => x.SolicitorAccount) 
+                .WithMany(x => x.SolicitorReviews)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            #endregion
+
             #region Solicitation
 
             modelBuilder.Entity<Solicitation>()
@@ -126,13 +159,9 @@ namespace Jobbie.Db.Extensions
                 .WithMany(x => x.Solicitations)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            #endregion
-
-            #region SolicitationRole
-
-            modelBuilder.Entity<SolicitationRole>()
-                .HasMany(x => x.ProvidedSoftware)
-                .WithOne(x => x.SolicitationRole)
+            modelBuilder.Entity<SolicitationContractor>()
+                .HasMany(x => x.StatusUpdates)
+                .WithOne(x => x.Contractor)
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
@@ -142,6 +171,29 @@ namespace Jobbie.Db.Extensions
             modelBuilder.Entity<SolicitationDeadline>()
                 .HasOne(x => x.DeadlineType)
                 .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            #endregion
+
+            #region SolicitationRole
+
+            modelBuilder.Entity<SolicitationRole>()
+                .HasMany(x => x.ProvidedSoftware)
+                .WithOne(x => x.SolicitationRole)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<SolicitationRole>()
+                .HasMany(x => x.RequiredSoftware)
+                .WithOne(x => x.SolicitationRole)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            #endregion
+
+            #region Solicitor
+
+            modelBuilder.Entity<Solicitor>()
+                .HasMany(x => x.StatusUpdates)
+                .WithOne(x => x.Solicitor)
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion

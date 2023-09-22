@@ -107,7 +107,13 @@ namespace Jobbie.Db.Models
         /// <remarks>Not required.</remarks>
         public string CompanyName { get; set;} = string.Empty;
 
-        public int CompanyTypeId { get; set; }
+        /// <summary>
+        /// Gets or sets the company type identifier.
+        /// </summary>
+        /// <value>
+        /// The company type identifier.
+        /// </value>
+        public int? CompanyTypeId { get; set; }
 
         /// <summary>
         /// Gets or sets the employer identification number.
@@ -161,7 +167,8 @@ namespace Jobbie.Db.Models
         /// The contractor rating.
         /// </value>
         /// <remarks>Returns average of contractors ratings.</remarks>
-        public double ContractorRating {
+        public double ContractorRating
+        {
             get 
             {
                 return ContractorReviews.Average(x => x.Rating);
@@ -175,12 +182,21 @@ namespace Jobbie.Db.Models
         /// The solicitor rating.
         /// </value>
         /// <remarks>Returns average of solicitors ratings.</remarks>
-        public double SolicitorRating {
+        public double SolicitorRating 
+        {
             get 
             {
                 return SolicitorReviews.Average(x => x.Rating);
             }
         }
+
+        /// <summary>
+        /// Navigational property. Gets or sets the type of the company.
+        /// </summary>
+        /// <value>
+        /// The type of the company.
+        /// </value>
+        public virtual CompanyType CompanyType { get; set; } = new();
 
         /// <summary>
         /// Navigational property. Gets or sets the contractor.

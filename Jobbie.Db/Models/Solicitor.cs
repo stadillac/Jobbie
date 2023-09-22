@@ -17,22 +17,6 @@ namespace Jobbie.Db.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the company type identifier.
-        /// </summary>
-        /// <value>
-        /// The company type identifier.
-        /// </value>
-        public int CompanyTypeId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the company.
-        /// </summary>
-        /// <value>
-        /// The name of the company.
-        /// </value>
-        public string CompanyName { get; set; } = string.Empty;
-
-        /// <summary>
         /// Navigational property. Gets or sets the account.
         /// </summary>
         /// <value>
@@ -41,19 +25,19 @@ namespace Jobbie.Db.Models
         public virtual Account Account { get; set; } = new();
 
         /// <summary>
-        /// Navigational property. Gets or sets the type of the company.
-        /// </summary>
-        /// <value>
-        /// The type of the company.
-        /// </value>
-        public virtual CompanyType CompanyType { get; set; } = new();
-
-        /// <summary>
         /// Navigational property. Gets or sets the solicitations.
         /// </summary>
         /// <value>
         /// The solicitations.
         /// </value>
         public virtual ICollection<Solicitation> Solicitations { get; set;} = new Collection<Solicitation>();
+
+        /// <summary>
+        /// Navigational property. Gets or sets the status updates.
+        /// </summary>
+        /// <value>
+        /// The status updates.
+        /// </value>
+        public virtual ICollection<StatusUpdate> StatusUpdates { get; set; } = new Collection<StatusUpdate>();
     }
 }

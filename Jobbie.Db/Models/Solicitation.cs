@@ -1,7 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Data;
 
 namespace Jobbie.Db.Models
 {
@@ -36,6 +33,16 @@ namespace Jobbie.Db.Models
         public string Description { get; set; } = string.Empty;
 
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is active.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is active; otherwise, <c>false</c>.
+        /// </value>
+        /// <remarks>This is true when a project has filled the required Roles needed,
+        /// and all Contractors and the Solicitor have accepted the StartDate</remarks>
+        public bool IsActive { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether this instance is complete.
         /// </summary>
         /// <value>
@@ -66,17 +73,54 @@ namespace Jobbie.Db.Models
         /// The start date.
         /// </value>
         public DateTime StartDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the city.
+        /// </summary>
+        /// <value>
+        /// The city.
+        /// </value>
         public string City { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the county.
+        /// </summary>
+        /// <value>
+        /// The county.
+        /// </value>
         public string County { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the state.
+        /// </summary>
+        /// <value>
+        /// The state.
+        /// </value>
         public string State { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the shared drive URL.
+        /// </summary>
+        /// <value>
+        /// The shared drive URL.
+        /// </value>
         public string SharedDriveUrl { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the estimated end date.
+        /// </summary>
+        /// <value>
+        /// The estimated end date.
+        /// </value>
         public DateTime EstimatedEndDate { get; set; }
-        public DateTime TeamMeetingDay { get; set;  }
+
+        /// <summary>
+        /// Gets or sets the team meeting time.
+        /// </summary>
+        /// <value>
+        /// The team meeting time.
+        /// </value>
         public DateTime TeamMeetingTime { get; set; }
-
-        // TODO
-        //StatusUpdates<-blog style posts from Solicitor or Contractor(s)
-
 
         /// <summary>
         /// Navigational property. Gets or sets the solicitor.
@@ -103,7 +147,7 @@ namespace Jobbie.Db.Models
         public virtual ICollection<SolicitationContractor> Contractors { get; set; } = new Collection<SolicitationContractor>();
 
         /// <summary>
-        /// Gets or sets the roles.
+        /// Navigational property. Gets or sets the roles.
         /// </summary>
         /// <value>
         /// The roles.

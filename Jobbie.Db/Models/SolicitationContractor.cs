@@ -1,4 +1,6 @@
-﻿namespace Jobbie.Db.Models
+﻿using System.Collections.ObjectModel;
+
+namespace Jobbie.Db.Models
 {
     /// <summary>
     /// The solicitation contractor model. Represents relationship
@@ -62,5 +64,13 @@
         /// The solicitation role.
         /// </value>
         public virtual SolicitationRole SolicitationRole { get; set; } = new();
+
+        /// <summary>
+        /// Navigational property. Gets or sets the status updates.
+        /// </summary>
+        /// <value>
+        /// The status updates.
+        /// </value>
+        public virtual ICollection<StatusUpdate> StatusUpdates { get; set; } = new Collection<StatusUpdate>();
     }
 }
