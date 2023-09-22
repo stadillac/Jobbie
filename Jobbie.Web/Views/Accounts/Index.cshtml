@@ -1,0 +1,49 @@
+﻿@using X.PagedList.Mvc.Core
+@using Jobbie.Web.Models
+
+@model AccountIndexViewModel
+
+<div class="row mt-4">
+    <div class="col">
+        <h2>Accounts</h2>
+        <hr />
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col">
+        <a class="btn btn-primary" href="/Accounts/Edit">New</a>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col">
+        <h4>Current Accounts</h4>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (AccountViewModel item in Model.Accounts)
+                {
+                    <tr>
+                        <td>@item.Username</td>
+                        <td>
+                            <a href="/Accounts/Edit/@item.Id" class="btn btn-primary">Edit</a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0);" class="btn btn-danger" onclick="softDelete('/Accounts/Delete', @item.Id, this)">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model.Accounts, page => Url.Action("Index", new { page }), Jobbie.Web.Helpers.HtmlHelper.PagedListRenderOptions)
+    </div>
+</div>
