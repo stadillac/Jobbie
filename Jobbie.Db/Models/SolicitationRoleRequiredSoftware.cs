@@ -38,7 +38,7 @@
         /// <value>
         /// The solicitation role.
         /// </value>
-        public virtual SolicitationRole SolicitationRole { get; set; } = new();
+        public virtual SolicitationRole? SolicitationRole { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the software.
@@ -46,6 +46,6 @@
         /// <value>
         /// The software.
         /// </value>
-        public virtual Software Software { get; set; } = new();
+        public virtual Software? Software { get; set; }
     }
 }

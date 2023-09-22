@@ -39,7 +39,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The type of the job.
         /// </value>
-        public virtual JobType JobType { get; set; } = new();
+        public virtual JobType? JobType { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the job subtype.
@@ -47,7 +47,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The job subtype.
         /// </value>
-        public virtual JobSubtype JobSubtype { get; set; } = new();
+        public virtual JobSubtype? JobSubtype { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the contractors.

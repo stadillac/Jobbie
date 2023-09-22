@@ -149,7 +149,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The solicitation.
         /// </value>
-        public Solicitation Solicitation { get; set; } = new Solicitation();
+        public virtual Solicitation? Solicitation { get; set; }
 
         /// <summary>
         /// Gets or sets the project deliverable.
@@ -157,7 +157,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The project deliverable.
         /// </value>
-        public ProjectDeliverable ProjectDeliverable { get; set; } = new ProjectDeliverable();
+        public virtual ProjectDeliverable? ProjectDeliverable { get; set; }
         
         /// <summary>
         /// Gets or sets the reviews.

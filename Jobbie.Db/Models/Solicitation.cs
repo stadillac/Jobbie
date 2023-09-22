@@ -128,7 +128,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The solicitor.
         /// </value>
-        public virtual Solicitor Solicitor { get; set; } = new();
+        public virtual Solicitor? Solicitor { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the deadline.
@@ -136,7 +136,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The deadline.
         /// </value>
-        public virtual SolicitationDeadline Deadline { get; set; } = new();
+        public virtual SolicitationDeadline? Deadline { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the contractors.

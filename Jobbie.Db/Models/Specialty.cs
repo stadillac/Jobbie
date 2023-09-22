@@ -39,6 +39,6 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The job subtype.
         /// </value>
-        public virtual JobSubtype JobSubtype { get; set; } = new();
+        public virtual JobSubtype? JobSubtype { get; set; }
     }
 }

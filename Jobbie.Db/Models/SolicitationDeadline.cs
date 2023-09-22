@@ -44,7 +44,7 @@
         /// <value>
         /// The solicitation.
         /// </value>
-        public virtual Solicitation Solicitation { get; set; } = new();
+        public virtual Solicitation? Solicitation { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the type of the deadline.
@@ -52,6 +52,6 @@
         /// <value>
         /// The type of the deadline.
         /// </value>
-        public virtual DeadlineType DeadlineType { get; set; } = new();
+        public virtual DeadlineType? DeadlineType { get; set; }
     }
 }

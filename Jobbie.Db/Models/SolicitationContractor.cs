@@ -47,7 +47,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The contractor.
         /// </value>
-        public virtual Contractor Contractor { get; set; } = new();
+        public virtual Contractor? Contractor { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the solicitation.
@@ -55,7 +55,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The solicitation.
         /// </value>
-        public virtual Solicitation Solicitation { get; set; } = new();
+        public virtual Solicitation? Solicitation { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the solicitation role.
@@ -63,7 +63,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The solicitation role.
         /// </value>
-        public virtual SolicitationRole SolicitationRole { get; set; } = new();
+        public virtual SolicitationRole? SolicitationRole { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the status updates.

@@ -22,7 +22,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The account.
         /// </value>
-        public virtual Account Account { get; set; } = new();
+        public virtual Account? Account { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the solicitations.

@@ -44,6 +44,6 @@
         /// <value>
         /// The account.
         /// </value>
-        public virtual Account Account { get; set; } = new();
+        public virtual Account? Account { get; set; }
     }
 }

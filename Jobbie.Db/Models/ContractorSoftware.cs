@@ -37,7 +37,7 @@
         /// <value>
         /// The contractor.
         /// </value>
-        public virtual Contractor Contractor { get; set; } = new Contractor();
+        public virtual Contractor? Contractor { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the software.
@@ -45,6 +45,6 @@
         /// <value>
         /// The software.
         /// </value>
-        public virtual Software Software { get; set; } = new Software();
+        public virtual Software? Software { get; set; }
     }
 }

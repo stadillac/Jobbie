@@ -68,6 +68,6 @@
         /// <value>
         /// The state.
         /// </value>
-        public virtual State State { get; set; } = new();
+        public virtual State? State { get; set; }
     }
 }

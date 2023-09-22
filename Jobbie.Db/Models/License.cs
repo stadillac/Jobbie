@@ -69,7 +69,7 @@
         /// <value>
         /// The contractor.
         /// </value>
-        public virtual Contractor Contractor { get; set; } = new();
+        public virtual Contractor? Contractor { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the state.
@@ -77,6 +77,6 @@
         /// <value>
         /// The state.
         /// </value>
-        public virtual State State { get; set; } = new();
+        public virtual State? State { get; set; }
     }
 }

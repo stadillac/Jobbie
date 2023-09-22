@@ -30,7 +30,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The job type job subtype.
         /// </value>
-        public virtual JobTypeJobSubtype JobTypeJobSubtype { get; set; } = new();
+        public virtual JobTypeJobSubtype? JobTypeJobSubtype { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the account.
@@ -38,7 +38,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The account.
         /// </value>
-        public virtual Account Account { get; set; } = new();
+        public virtual Account? Account { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the licenses.

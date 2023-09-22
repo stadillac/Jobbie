@@ -196,7 +196,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The type of the company.
         /// </value>
-        public virtual CompanyType CompanyType { get; set; } = new();
+        public virtual CompanyType? CompanyType { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the contractor.
@@ -204,7 +204,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The contractor.
         /// </value>
-        public virtual Contractor Contractor { get; set; } = new();
+        public virtual Contractor? Contractor { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the solicitor.
@@ -220,7 +220,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The bank account.
         /// </value>
-        public virtual BankAccount BankAccount { get; set;} = new();
+        public virtual BankAccount? BankAccount { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the address.
@@ -228,7 +228,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The address.
         /// </value>
-        public virtual Address Address { get; set; } = new();
+        public virtual Address? Address { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the documents.
