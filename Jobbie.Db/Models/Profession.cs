@@ -3,10 +3,10 @@
 namespace Jobbie.Db.Models
 {
     /// <summary>
-    /// The job type model.
+    /// The profession model.
     /// </summary>
     /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class JobType : Audit
+    public class Profession : Audit
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -40,13 +40,6 @@ namespace Jobbie.Db.Models
         /// </value>
         public bool HasLicense { get; set; }
 
-        /// <summary>
-        /// Navigational property. Gets or sets the job type job subtypes.
-        /// </summary>
-        /// <value>
-        /// The job type job subtypes.
-        /// </value>
-        public virtual ICollection<JobTypeJobSubtype> JobTypeJobSubtypes { get; set; } = new Collection<JobTypeJobSubtype>();
-
+        public virtual ProfessionDiscipline? ProfessionDiscipline { get; set; }
     }
 }

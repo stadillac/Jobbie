@@ -38,7 +38,7 @@
         /// The reviewer identifier.
         /// </value>
         /// <remarks>This relates to the account that created the review.</remarks>
-        public int ReviewerId { get; set; }
+        public int ReviewerId { get; set; } // TODO We need to have this point to something. Maybe a new table?
 
         /// <summary>
         /// Gets or sets the solicitation role identifier.

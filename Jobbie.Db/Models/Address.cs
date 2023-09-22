@@ -60,7 +60,7 @@
         /// <value>
         /// The country.
         /// </value>
-        public string Country { get; set; } = "USA";
+        public string? Country { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the state.

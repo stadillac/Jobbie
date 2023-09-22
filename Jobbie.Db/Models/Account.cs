@@ -161,36 +161,6 @@ namespace Jobbie.Db.Models
         public int CurrentWorkload { get; set; }
 
         /// <summary>
-        /// Gets the contractor rating.
-        /// </summary>
-        /// <value>
-        /// The contractor rating.
-        /// </value>
-        /// <remarks>Returns average of contractors ratings.</remarks>
-        public double ContractorRating
-        {
-            get 
-            {
-                return ContractorReviews.Average(x => x.Rating);
-            }
-        }
-
-        /// <summary>
-        /// Gets the solicitor rating.
-        /// </summary>
-        /// <value>
-        /// The solicitor rating.
-        /// </value>
-        /// <remarks>Returns average of solicitors ratings.</remarks>
-        public double SolicitorRating 
-        {
-            get 
-            {
-                return SolicitorReviews.Average(x => x.Rating);
-            }
-        }
-
-        /// <summary>
         /// Navigational property. Gets or sets the type of the company.
         /// </summary>
         /// <value>

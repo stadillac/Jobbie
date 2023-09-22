@@ -3,10 +3,10 @@
 namespace Jobbie.Db.Models
 {
     /// <summary>
-    /// The job sub type model.
+    /// The discipline model.
     /// </summary>
     /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class JobSubtype : Audit
+    public class Discipline : Audit
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -32,20 +32,14 @@ namespace Jobbie.Db.Models
         /// </value>
         public bool HasSpecialty { get; set; }
 
-        /// <summary>
-        /// Navigational property. Gets or sets the job type job subtypes.
-        /// </summary>
-        /// <value>
-        /// The job type job subtypes.
-        /// </value>
-        public virtual ICollection<JobTypeJobSubtype> JobTypeJobSubtypes { get; set; } = new Collection<JobTypeJobSubtype>();
+        public virtual ProfessionDiscipline? ProfessionDiscipline { get; set; }
 
         /// <summary>
-        /// Navigational property. Gets or sets the specialties.
+        /// Navigational property. Gets or sets the Focus.
         /// </summary>
         /// <value>
-        /// The specialties.
+        /// The Focus.
         /// </value>
-        public virtual ICollection<Specialty> Specialties { get; set; } = new Collection<Specialty>();
+        public virtual Focus? Focus { get; set; }
     }
 }

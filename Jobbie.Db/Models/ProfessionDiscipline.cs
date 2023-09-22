@@ -7,7 +7,7 @@ namespace Jobbie.Db.Models
     /// job type and job sub type.
     /// </summary>
     /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class JobTypeJobSubtype : Audit
+    public class ProfessionDiscipline : Audit
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -23,7 +23,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The job type identifier.
         /// </value>
-        public int JobTypeId { get; set; }
+        public int ProfessionId { get; set; }
 
         /// <summary>
         /// Gets or sets the job subtype identifier.
@@ -31,7 +31,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The job subtype identifier.
         /// </value>
-        public int JobSubtypeId { get; set; }
+        public int DisciplineId { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the type of the job.
@@ -39,7 +39,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The type of the job.
         /// </value>
-        public virtual JobType? JobType { get; set; }
+        public virtual Profession? Profession { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the job subtype.
@@ -47,7 +47,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The job subtype.
         /// </value>
-        public virtual JobSubtype? JobSubtype { get; set; }
+        public virtual Discipline? Discipline { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the contractors.

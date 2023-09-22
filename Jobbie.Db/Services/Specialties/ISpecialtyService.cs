@@ -2,7 +2,7 @@
 
 namespace Jobbie.Db.Services
 {
-    public interface ISpecialtyService : IBaseService<Specialty>
+    public interface ISpecialtyService : IBaseService<Expertise>
     {
     }
 }

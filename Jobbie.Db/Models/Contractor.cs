@@ -22,7 +22,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The job type job subtype identifier.
         /// </value>
-        public int JobTypeJobSubtypeId { get; set; }
+        public int ProfessionDisciplineId { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the job type job subtype.
@@ -30,7 +30,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The job type job subtype.
         /// </value>
-        public virtual JobTypeJobSubtype? JobTypeJobSubtype { get; set; }
+        public virtual ProfessionDiscipline? ProfessionDiscipline { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the account.

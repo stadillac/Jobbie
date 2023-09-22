@@ -58,7 +58,7 @@ namespace Jobbie.Db.Extensions
             #region Contractor
 
             modelBuilder.Entity<Contractor>()
-                .HasOne(x => x.JobTypeJobSubtype)
+                .HasOne(x => x.ProfessionDiscipline)
                 .WithMany(x => x.Contractors)
                 .OnDelete(DeleteBehavior.NoAction);
 
@@ -94,18 +94,18 @@ namespace Jobbie.Db.Extensions
 
             #region JobSubtype
 
-            modelBuilder.Entity<JobSubtype>()
-                .HasMany(x => x.JobTypeJobSubtypes)
-                .WithOne(x => x.JobSubtype)
+            modelBuilder.Entity<Discipline>()
+                .HasOne(x => x.ProfessionDiscipline)
+                .WithOne(x => x.Discipline)
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
 
             #region JobType
 
-            modelBuilder.Entity<JobType>()
-                .HasMany(x => x.JobTypeJobSubtypes)
-                .WithOne(x => x.JobType)
+            modelBuilder.Entity<Profession>()
+                .HasOne(x => x.ProfessionDiscipline)
+                .WithOne(x => x.Profession)
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
@@ -200,9 +200,9 @@ namespace Jobbie.Db.Extensions
 
             #region Specialty
 
-            modelBuilder.Entity<Specialty>()
-                .HasOne(x => x.JobSubtype)
-                .WithMany(x => x.Specialties)
+            modelBuilder.Entity<Expertise>()
+                .HasOne(x => x.Focus)
+                .WithMany(x => x.Expertises)
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion

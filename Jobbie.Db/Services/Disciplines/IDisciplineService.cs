@@ -2,7 +2,7 @@
 
 namespace Jobbie.Db.Services
 {
-    public interface IJobSubtypeService : IBaseService<JobSubtype>
+    public interface IDisciplineService : IBaseService<Discipline>
     {
     }
 }

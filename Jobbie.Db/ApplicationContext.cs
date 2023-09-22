@@ -26,9 +26,9 @@ namespace Jobbie.Db
         public DbSet<DeadlineType> DeadlineTypes { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<ErrorLog> ErrorLogs { get; set; }
-        public DbSet<JobSubtype> JobSubtypes { get; set; }
-        public DbSet<JobType> JobTypes { get; set; }
-        public DbSet<JobTypeJobSubtype> JobTypeJobSubtypes { get; set; }
+        public DbSet<Discipline> JobSubtypes { get; set; }
+        public DbSet<Profession> JobTypes { get; set; }
+        public DbSet<ProfessionDiscipline> JobTypeJobSubtypes { get; set; }
         public DbSet<License> Licenses { get; set; }
         public DbSet<ProjectDeliverable> ProjectDeliverables { get; set; }
         public DbSet<Review> Reviews { get; set; }
@@ -40,7 +40,7 @@ namespace Jobbie.Db
         public DbSet<SolicitationRoleProvidedSoftware> SolicitationRoleProvidedSoftware { get; set; }
         public DbSet<SolicitationRoleRequiredSoftware> SolicitationRoleRequiredSoftware { get; set; }
         public DbSet<Solicitor> Solicitors { get; set; }
-        public DbSet<Specialty> Specialties { get; set; }
+        public DbSet<Expertise> Specialties { get; set; }
         public DbSet<State> States { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
