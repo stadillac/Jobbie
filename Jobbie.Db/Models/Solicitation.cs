@@ -5,17 +5,9 @@ namespace Jobbie.Db.Models
     /// <summary>
     /// The solicitation model. Represents a job.
     /// </summary>
-    /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class Solicitation : Audit
+    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
+    public class Solicitation : BaseEntity
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
         /// <summary>
         /// Gets or sets the solicitor identifier.
         /// </summary>

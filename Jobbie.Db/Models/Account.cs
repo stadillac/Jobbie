@@ -7,17 +7,9 @@ namespace Jobbie.Db.Models
     /// but can also have a solicitor record. I.E a user must be a contractor,
     /// but can also hire/create jobs.
     /// </summary>
-    /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class Account : Audit
+    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
+    public class Account : BaseEntity
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
         /// <summary>
         /// Gets or sets the contractor identifier.
         /// </summary>

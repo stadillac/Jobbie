@@ -4,16 +4,8 @@
     /// The document model. Represents any uploaded
     /// document.
     /// </summary>
-    public class Document : Audit
+    public class Document : BaseEntity
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
         /// <summary>
         /// Gets or sets the content.
         /// </summary>

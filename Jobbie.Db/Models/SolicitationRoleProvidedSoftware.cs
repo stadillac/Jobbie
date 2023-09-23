@@ -5,17 +5,9 @@
     /// the software that will be provided for use for a specific
     /// solicitation role.
     /// </summary>
-    /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class SolicitationRoleProvidedSoftware : Audit
+    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
+    public class SolicitationRoleProvidedSoftware : BaseEntity
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
         /// <summary>
         /// Gets or sets the solicitation role identifier.
         /// </summary>

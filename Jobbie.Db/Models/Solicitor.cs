@@ -5,17 +5,9 @@ namespace Jobbie.Db.Models
     /// <summary>
     /// The solicitor model. Represents anyone posting a job.
     /// </summary>
-    /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class Solicitor : Audit
+    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
+    public class Solicitor : BaseEntity
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
         /// <summary>
         /// Navigational property. Gets or sets the account.
         /// </summary>

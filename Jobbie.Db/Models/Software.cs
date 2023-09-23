@@ -1,15 +1,11 @@
 ﻿namespace Jobbie.Db.Models
 {
-    public class Software : Audit
+    /// <summary>
+    /// The software model.
+    /// </summary>
+    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
+    public class Software : BaseEntity
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
         /// <summary>
         /// Gets or sets the name.
         /// </summary>

@@ -3,20 +3,12 @@
 namespace Jobbie.Db.Models
 {
     /// <summary>
-    /// The job type job sub type model. Represents relationship between
-    /// job type and job sub type.
+    /// The profession discipline model. Represents the various
+    /// combinations of profession and discipline.
     /// </summary>
-    /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class ProfessionDiscipline : Audit
+    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
+    public class ProfessionDiscipline : BaseEntity
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
         /// <summary>
         /// Gets or sets the job type identifier.
         /// </summary>

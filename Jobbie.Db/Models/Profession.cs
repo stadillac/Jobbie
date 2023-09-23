@@ -3,19 +3,11 @@
 namespace Jobbie.Db.Models
 {
     /// <summary>
-    /// The profession model.
+    /// The profession model. Think "I am an ENGINEER". 
     /// </summary>
-    /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class Profession : Audit
+    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
+    public class Profession : BaseEntity
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
@@ -40,6 +32,12 @@ namespace Jobbie.Db.Models
         /// </value>
         public bool HasLicense { get; set; }
 
-        public virtual ProfessionDiscipline? ProfessionDiscipline { get; set; }
+        /// <summary>
+        /// Navgiational property. Gets or sets the profession disciplines.
+        /// </summary>
+        /// <value>
+        /// The profession disciplines.
+        /// </value>
+        public virtual ICollection<ProfessionDiscipline> ProfessionDisciplines { get; set; } = new Collection<ProfessionDiscipline>();
     }
 }

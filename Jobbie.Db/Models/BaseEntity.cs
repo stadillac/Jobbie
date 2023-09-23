@@ -2,10 +2,18 @@
 {
     /// <summary>
     /// The audit model. Used to keep track of record
-    /// creation and modification.
+    /// creation and modification. Also used to store common properties.
     /// </summary>
-    public class Audit
+    public class BaseEntity
     {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        public int Id { get; set; }
+
         /// <summary>
         /// Gets or sets who created the record.
         /// </summary>

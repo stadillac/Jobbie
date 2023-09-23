@@ -6,17 +6,9 @@ namespace Jobbie.Db.Models
     /// The solicitation contractor model. Represents relationship
     /// between contractor and soliciation.
     /// </summary>
-    /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class SolicitationContractor : Audit
+    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
+    public class SolicitationContractor : BaseEntity
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
         /// <summary>
         /// Gets or sets the contractor identifier.
         /// </summary>

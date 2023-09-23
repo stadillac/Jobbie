@@ -3,17 +3,9 @@
     /// <summary>
     /// The review model. 
     /// </summary>
-    /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class Review : Audit
+    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
+    public class Review : BaseEntity
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
         /// <summary>
         /// Gets or sets the contractor account identifier.
         /// </summary>

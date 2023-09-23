@@ -92,19 +92,19 @@ namespace Jobbie.Db.Extensions
 
             #endregion
 
-            #region JobSubtype
+            #region Discipline
 
             modelBuilder.Entity<Discipline>()
-                .HasOne(x => x.ProfessionDiscipline)
+                .HasMany(x => x.ProfessionDisciplines)
                 .WithOne(x => x.Discipline)
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
 
-            #region JobType
+            #region Profession
 
             modelBuilder.Entity<Profession>()
-                .HasOne(x => x.ProfessionDiscipline)
+                .HasMany(x => x.ProfessionDisciplines)
                 .WithOne(x => x.Profession)
                 .OnDelete(DeleteBehavior.NoAction);
 

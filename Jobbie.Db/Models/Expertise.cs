@@ -3,20 +3,16 @@
 namespace Jobbie.Db.Models
 {
     /// <summary>
-    /// The specialty model. Represents any specialty
-    /// that a job sub type may have.
+    /// The Expertise model. Represents any expertises
+    /// that a focus may have.
+    /// Think "I am a civil engineer that focuses on transportation with an
+    /// expertise in traffic" or
+    /// "I am a software engineer that focuses on web dev with an expertise in 
+    /// back end dev"
     /// </summary>
-    /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class Expertise : Audit
+    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
+    public class Expertise : BaseEntity
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
@@ -41,6 +37,12 @@ namespace Jobbie.Db.Models
         /// </value>
         public virtual Focus? Focus { get; set; }
 
+        /// <summary>
+        /// Gets or sets the specialties.
+        /// </summary>
+        /// <value>
+        /// The specialties.
+        /// </value>
         public virtual ICollection<Specialty> Specialties { get; set; } = new Collection<Specialty>();
     }
 }

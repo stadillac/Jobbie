@@ -3,17 +3,9 @@
     /// <summary>
     /// The bank account model.
     /// </summary>
-    /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class BankAccount : Audit
+    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
+    public class BankAccount : BaseEntity
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
         /// <summary>
         /// Gets or sets the name of the bank.
         /// </summary>

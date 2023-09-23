@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 namespace Jobbie.Db.Services
 {
     /// <inheritdoc />
-    public class BaseService<T> : IBaseService<T> where T : Audit
+    public class BaseService<T> : IBaseService<T> where T : BaseEntity
     {
         protected ApplicationContext _context;
 

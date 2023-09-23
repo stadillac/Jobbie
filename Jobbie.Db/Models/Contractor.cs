@@ -5,30 +5,22 @@ namespace Jobbie.Db.Models
     /// <summary>
     /// The contractor model.
     /// </summary>
-    /// <seealso cref="Jobbie.Db.Models.Audit" />
-    public class Contractor : Audit
+    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
+    public class Contractor : BaseEntity
     {
         /// <summary>
-        /// Gets or sets the identifier.
+        /// Gets or sets the profession discipline identifier.
         /// </summary>
         /// <value>
-        /// The identifier.
-        /// </value>
-        public int Id { get; set; }
-
-        /// <summary>
-        /// Gets or sets the job type job subtype identifier.
-        /// </summary>
-        /// <value>
-        /// The job type job subtype identifier.
+        /// The profession discipline identifier.
         /// </value>
         public int ProfessionDisciplineId { get; set; }
 
         /// <summary>
-        /// Navigational property. Gets or sets the job type job subtype.
+        /// Gets or sets the profession discipline.
         /// </summary>
         /// <value>
-        /// The job type job subtype.
+        /// The profession discipline.
         /// </value>
         public virtual ProfessionDiscipline? ProfessionDiscipline { get; set; }
 
