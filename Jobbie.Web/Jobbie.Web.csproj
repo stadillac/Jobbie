@@ -19,9 +19,4 @@
     <ProjectReference Include="..\Jobbie.Db\Jobbie.Db.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\JobTypes\" />
-    <Folder Include="Models\JobSubtypes\" />
-  </ItemGroup>
-
 </Project>
