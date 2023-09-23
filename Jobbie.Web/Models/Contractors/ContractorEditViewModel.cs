@@ -2,5 +2,6 @@
 {
     public class ContractorEditViewModel
     {
+        public int Id { get; set; }
     }
 }

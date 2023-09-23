@@ -6,22 +6,23 @@ using Jobbie.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
 
-namespace Jobbie.Web.Controllers
+namespace Jobbie.Web.Areas.Admin.Controllers
 {
-    public class AccountsController : Controller
+    [Area("Admin")]
+    public class BankAccountsController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IAccountService _accountService;
+        private readonly IBankAccountService _bankAccountService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountsController"/> class.
+        /// Initializes a new instance of the <see cref="BankAccountsController"/> class.
         /// </summary>
         /// <param name="mapper"></param>
-        /// <param name="accountService"></param>
-        public AccountsController(IMapper mapper, IAccountService accountService)
+        /// <param name="bankAccountService"></param>
+        public BankAccountsController(IMapper mapper, IBankAccountService bankAccountService)
         {
             _mapper = mapper;
-            _accountService = accountService;
+            _bankAccountService = bankAccountService;
         }
 
         /// <summary>
@@ -31,15 +32,15 @@ namespace Jobbie.Web.Controllers
         /// <returns></returns>
         public IActionResult Index(int? page)
         {
-            IEnumerable<Account> accounts = _accountService.List();
+            IEnumerable<BankAccount> accounts = _bankAccountService.List();
 
-            IPagedList<AccountViewModel> accountViewModels = accounts
+            IPagedList<BankAccountViewModel> accountViewModels = accounts
                 .ToPagedList(page ?? 1, Constants.Constants.PageSize)
-                .Map<Account, AccountViewModel>(_mapper);
+                .Map<BankAccount, BankAccountViewModel>(_mapper);
 
-            AccountIndexViewModel model = new AccountIndexViewModel
+            BankAccountIndexViewModel model = new BankAccountIndexViewModel
             {
-                Accounts = accountViewModels
+                BankAccounts = accountViewModels
             };
 
             return View(model);
@@ -52,16 +53,16 @@ namespace Jobbie.Web.Controllers
         /// <returns></returns>
         public IActionResult Edit(int? id)
         {
-            Account? account = id.HasValue
-                ? _accountService.Get(x => x.Id == id.Value)
-                : new Account();
+            BankAccount? account = id.HasValue
+                ? _bankAccountService.Get(x => x.Id == id.Value)
+                : new BankAccount();
 
             if (account == null)
             {
                 return RedirectToAction("Index");
             }
 
-            AccountEditViewModel model = _mapper.Map<AccountEditViewModel>(account);
+            BankAccountEditViewModel model = _mapper.Map<BankAccountEditViewModel>(account);
             //InstantiateSelectLists(model);
 
             return View(model);
@@ -73,7 +74,7 @@ namespace Jobbie.Web.Controllers
         /// <param name="model">The model.</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Edit(AccountEditViewModel model)
+        public IActionResult Edit(BankAccountEditViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -83,14 +84,14 @@ namespace Jobbie.Web.Controllers
 
             if (model.Id != 0)
             {
-                Account? account = _accountService.Get(x => x.Id == model.Id);
+                BankAccount? account = _bankAccountService.Get(x => x.Id == model.Id);
                 _mapper.Map(model, account);
-                _accountService.Update(account);
+                _bankAccountService.Update(account);
             }
             else
             {
-                Account account = _mapper.Map<Account>(model);
-                _accountService.Create(account);
+                BankAccount account = _mapper.Map<BankAccount>(model);
+                _bankAccountService.Create(account);
             }
 
             return RedirectToAction("Index");
@@ -98,14 +99,14 @@ namespace Jobbie.Web.Controllers
 
         public JsonResult Delete(int id)
         {
-            Account? account = _accountService.Get(x => x.Id == id);
+            BankAccount? account = _bankAccountService.Get(x => x.Id == id);
 
             if (account == null)
             {
-                return Json(false);    
+                return Json(false);
             }
 
-            _accountService.Delete(account);
+            _bankAccountService.Delete(account);
 
             return Json(true);
         }
