@@ -18,14 +18,6 @@ namespace Jobbie.Db.Models
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has specialty.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance has specialty; otherwise, <c>false</c>.
-        /// </value>
-        public bool HasSpecialty { get; set; }
-
-        /// <summary>
         /// Navigational property. Gets or sets the Focus.
         /// </summary>
         /// <value>

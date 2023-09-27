@@ -19,6 +19,14 @@ namespace Jobbie.Db.Models
         public int DisciplineId { get; set; }
 
         /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Name { get; set; } = string.Empty;
+
+        /// <summary>
         /// Gets or sets the discipline.
         /// </summary>
         /// <value>
