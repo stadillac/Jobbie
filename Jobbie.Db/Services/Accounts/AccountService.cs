@@ -8,5 +8,14 @@ namespace Jobbie.Db.Services
         public AccountService(ApplicationContext context) : base(context)
         {
         }
+
+        /// <inheritdoc />
+        public Account Verify(Account entity)
+        {
+            entity.IsVerified = true;
+            _context.Accounts.Update(entity);
+            _context.SaveChanges();
+            return entity;
+        }
     }
 }

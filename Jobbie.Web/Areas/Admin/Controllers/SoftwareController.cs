@@ -9,20 +9,20 @@ using X.PagedList;
 namespace Jobbie.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AccountsController : Controller
+    public class SoftwareController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IAccountService _accountService;
+        private readonly ISoftwareService _softwareService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountsController"/> class.
+        /// Initializes a new instance of the <see cref="SoftwareController"/> class.
         /// </summary>
         /// <param name="mapper"></param>
-        /// <param name="accountService"></param>
-        public AccountsController(IMapper mapper, IAccountService accountService)
+        /// <param name="service"></param>
+        public SoftwareController(IMapper mapper, ISoftwareService service)
         {
             _mapper = mapper;
-            _accountService = accountService;
+            _softwareService = service;
         }
 
         /// <summary>
@@ -32,15 +32,15 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Index(int? page)
         {
-            IEnumerable<Account> accounts = _accountService.List();
+            IEnumerable<Software> softwares = _softwareService.List();
 
-            IPagedList<AccountViewModel> accountViewModels = accounts
+            IPagedList<SoftwareViewModel> softwareViewModels = softwares
                 .ToPagedList(page ?? 1, Constants.Constants.PageSize)
-                .Map<Account, AccountViewModel>(_mapper);
+                .Map<Software, SoftwareViewModel>(_mapper);
 
-            AccountIndexViewModel model = new AccountIndexViewModel
+            SoftwareIndexViewModel model = new SoftwareIndexViewModel
             {
-                Accounts = accountViewModels
+                Software = softwareViewModels
             };
 
             return View(model);
@@ -53,17 +53,16 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Edit(int? id)
         {
-            Account? account = id.HasValue
-                ? _accountService.Get(x => x.Id == id.Value)
-                : new Account();
+            Software? software = id.HasValue
+                ? _softwareService.Get(x => x.Id == id.Value)
+                : new Software();
 
-            if (account == null)
+            if (software == null)
             {
                 return RedirectToAction("Index");
             }
 
-            AccountEditViewModel model = _mapper.Map<AccountEditViewModel>(account);
-            //InstantiateSelectLists(model);
+            SoftwareEditViewModel model = _mapper.Map<SoftwareEditViewModel>(software);
 
             return View(model);
         }
@@ -74,7 +73,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <param name="model">The model.</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Edit(AccountEditViewModel model)
+        public IActionResult Edit(SoftwareEditViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -84,14 +83,14 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
             if (model.Id != 0)
             {
-                Account? account = _accountService.Get(x => x.Id == model.Id);
-                _mapper.Map(model, account);
-                _accountService.Update(account);
+                Software? software = _softwareService.Get(x => x.Id == model.Id);
+                _mapper.Map(model, software);
+                _softwareService.Update(software);
             }
             else
             {
-                Account account = _mapper.Map<Account>(model);
-                _accountService.Create(account);
+                Software software = _mapper.Map<Software>(model);
+                _softwareService.Create(software);
             }
 
             return RedirectToAction("Index");
@@ -99,31 +98,16 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
         public JsonResult Delete(int id)
         {
-            Account? account = _accountService.Get(x => x.Id == id);
+            Software? software = _softwareService.Get(x => x.Id == id);
 
-            if (account == null)
+            if (software == null)
             {
                 return Json(false);
             }
 
-            _accountService.Delete(account);
+            _softwareService.Delete(software);
 
             return Json(true);
         }
-
-        public JsonResult Verify(int id)
-        {
-            Account? account = _accountService.Get(x => x.Id == id);
-
-            if (account == null)
-            {
-                return Json(false);
-            }
-
-            _accountService.Verify(account);
-
-            return Json(true);
-        }
-
     }
 }

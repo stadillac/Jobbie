@@ -9,20 +9,20 @@ using X.PagedList;
 namespace Jobbie.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AccountsController : Controller
+    public class SpecialtiesController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IAccountService _accountService;
+        private readonly ISpecialtyService _specialtyService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountsController"/> class.
+        /// Initializes a new instance of the <see cref="SpecialtiesController"/> class.
         /// </summary>
         /// <param name="mapper"></param>
-        /// <param name="accountService"></param>
-        public AccountsController(IMapper mapper, IAccountService accountService)
+        /// <param name="service"></param>
+        public SpecialtiesController(IMapper mapper, ISpecialtyService service)
         {
             _mapper = mapper;
-            _accountService = accountService;
+            _specialtyService = service;
         }
 
         /// <summary>
@@ -32,15 +32,15 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Index(int? page)
         {
-            IEnumerable<Account> accounts = _accountService.List();
+            IEnumerable<Specialty> specialtys = _specialtyService.List();
 
-            IPagedList<AccountViewModel> accountViewModels = accounts
+            IPagedList<SpecialtyViewModel> specialtyViewModels = specialtys
                 .ToPagedList(page ?? 1, Constants.Constants.PageSize)
-                .Map<Account, AccountViewModel>(_mapper);
+                .Map<Specialty, SpecialtyViewModel>(_mapper);
 
-            AccountIndexViewModel model = new AccountIndexViewModel
+            SpecialtyIndexViewModel model = new SpecialtyIndexViewModel
             {
-                Accounts = accountViewModels
+                Specialties = specialtyViewModels
             };
 
             return View(model);
@@ -53,17 +53,16 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Edit(int? id)
         {
-            Account? account = id.HasValue
-                ? _accountService.Get(x => x.Id == id.Value)
-                : new Account();
+            Specialty? specialty = id.HasValue
+                ? _specialtyService.Get(x => x.Id == id.Value)
+                : new Specialty();
 
-            if (account == null)
+            if (specialty == null)
             {
                 return RedirectToAction("Index");
             }
 
-            AccountEditViewModel model = _mapper.Map<AccountEditViewModel>(account);
-            //InstantiateSelectLists(model);
+            SpecialtyEditViewModel model = _mapper.Map<SpecialtyEditViewModel>(specialty);
 
             return View(model);
         }
@@ -74,7 +73,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <param name="model">The model.</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Edit(AccountEditViewModel model)
+        public IActionResult Edit(SpecialtyEditViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -84,14 +83,14 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
             if (model.Id != 0)
             {
-                Account? account = _accountService.Get(x => x.Id == model.Id);
-                _mapper.Map(model, account);
-                _accountService.Update(account);
+                Specialty? specialty = _specialtyService.Get(x => x.Id == model.Id);
+                _mapper.Map(model, specialty);
+                _specialtyService.Update(specialty);
             }
             else
             {
-                Account account = _mapper.Map<Account>(model);
-                _accountService.Create(account);
+                Specialty specialty = _mapper.Map<Specialty>(model);
+                _specialtyService.Create(specialty);
             }
 
             return RedirectToAction("Index");
@@ -99,31 +98,16 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
         public JsonResult Delete(int id)
         {
-            Account? account = _accountService.Get(x => x.Id == id);
+            Specialty? specialty = _specialtyService.Get(x => x.Id == id);
 
-            if (account == null)
+            if (specialty == null)
             {
                 return Json(false);
             }
 
-            _accountService.Delete(account);
+            _specialtyService.Delete(specialty);
 
             return Json(true);
         }
-
-        public JsonResult Verify(int id)
-        {
-            Account? account = _accountService.Get(x => x.Id == id);
-
-            if (account == null)
-            {
-                return Json(false);
-            }
-
-            _accountService.Verify(account);
-
-            return Json(true);
-        }
-
     }
 }

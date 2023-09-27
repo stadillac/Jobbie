@@ -3,7 +3,7 @@
 namespace Jobbie.Db.Services
 {
     /// <inheritdoc />
-    public class SpecialtyService : BaseService<Expertise>, ISpecialtyService
+    public class SpecialtyService : BaseService<Specialty>, ISpecialtyService
     {
         public SpecialtyService(ApplicationContext context) : base(context)
         {

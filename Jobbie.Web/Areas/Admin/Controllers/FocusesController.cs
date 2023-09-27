@@ -9,20 +9,20 @@ using X.PagedList;
 namespace Jobbie.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AccountsController : Controller
+    public class FocusesController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IAccountService _accountService;
+        private readonly IFocusService _focusService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountsController"/> class.
+        /// Initializes a new instance of the <see cref="FocussController"/> class.
         /// </summary>
         /// <param name="mapper"></param>
-        /// <param name="accountService"></param>
-        public AccountsController(IMapper mapper, IAccountService accountService)
+        /// <param name="service"></param>
+        public FocusesController(IMapper mapper, IFocusService service)
         {
             _mapper = mapper;
-            _accountService = accountService;
+            _focusService = service;
         }
 
         /// <summary>
@@ -32,15 +32,15 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Index(int? page)
         {
-            IEnumerable<Account> accounts = _accountService.List();
+            IEnumerable<Focus> focuses = _focusService.List();
 
-            IPagedList<AccountViewModel> accountViewModels = accounts
+            IPagedList<FocusViewModel> focusViewModels = focuses
                 .ToPagedList(page ?? 1, Constants.Constants.PageSize)
-                .Map<Account, AccountViewModel>(_mapper);
+                .Map<Focus, FocusViewModel>(_mapper);
 
-            AccountIndexViewModel model = new AccountIndexViewModel
+            FocusIndexViewModel model = new FocusIndexViewModel
             {
-                Accounts = accountViewModels
+                Focuses = focusViewModels
             };
 
             return View(model);
@@ -53,17 +53,16 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Edit(int? id)
         {
-            Account? account = id.HasValue
-                ? _accountService.Get(x => x.Id == id.Value)
-                : new Account();
+            Focus? focus = id.HasValue
+                ? _focusService.Get(x => x.Id == id.Value)
+                : new Focus();
 
-            if (account == null)
+            if (focus == null)
             {
                 return RedirectToAction("Index");
             }
 
-            AccountEditViewModel model = _mapper.Map<AccountEditViewModel>(account);
-            //InstantiateSelectLists(model);
+            FocusEditViewModel model = _mapper.Map<FocusEditViewModel>(focus);
 
             return View(model);
         }
@@ -74,7 +73,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <param name="model">The model.</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Edit(AccountEditViewModel model)
+        public IActionResult Edit(FocusEditViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -84,14 +83,14 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
             if (model.Id != 0)
             {
-                Account? account = _accountService.Get(x => x.Id == model.Id);
-                _mapper.Map(model, account);
-                _accountService.Update(account);
+                Focus? focus = _focusService.Get(x => x.Id == model.Id);
+                _mapper.Map(model, focus);
+                _focusService.Update(focus);
             }
             else
             {
-                Account account = _mapper.Map<Account>(model);
-                _accountService.Create(account);
+                Focus focus = _mapper.Map<Focus>(model);
+                _focusService.Create(focus);
             }
 
             return RedirectToAction("Index");
@@ -99,31 +98,16 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
         public JsonResult Delete(int id)
         {
-            Account? account = _accountService.Get(x => x.Id == id);
+            Focus? focus = _focusService.Get(x => x.Id == id);
 
-            if (account == null)
+            if (focus == null)
             {
                 return Json(false);
             }
 
-            _accountService.Delete(account);
+            _focusService.Delete(focus);
 
             return Json(true);
         }
-
-        public JsonResult Verify(int id)
-        {
-            Account? account = _accountService.Get(x => x.Id == id);
-
-            if (account == null)
-            {
-                return Json(false);
-            }
-
-            _accountService.Verify(account);
-
-            return Json(true);
-        }
-
     }
 }

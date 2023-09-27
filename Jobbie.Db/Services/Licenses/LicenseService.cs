@@ -8,5 +8,13 @@ namespace Jobbie.Db.Services
         public LicenseService(ApplicationContext context) : base(context)
         {
         }
+
+        public License Verify(License license)
+        {
+            license.IsVerified = true;
+            _context.Licenses.Update(license);
+            _context.SaveChanges();
+            return license;
+        }
     }
 }

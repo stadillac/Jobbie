@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Jobbie.Db.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Jobbie.Web.Models
@@ -29,6 +30,25 @@ namespace Jobbie.Web.Models
         [DisplayName("Phone")]
         public string PhoneNumber { get; set; } = string.Empty;
 
-        // TODO Add other properties that need to be editable
+        // todo requires dropdown
+        public int ContractorId { get; set; }
+
+        // todo requires dropdown
+        public int? SolicitorId { get; set; }
+
+        
+        public string Username { get; set; } = string.Empty;
+        public string CompanyName { get; set; } = string.Empty;
+        public int? CompanyTypeId { get; set; }
+        public string EmployerIdentificationNumber { get; set; } = string.Empty;
+        public string SocialSecurityNumber { get; set; } = string.Empty;
+        public bool IsVerified { get; set; }
+        public int HoursAvailablePerWeek { get; set; }
+        public int CurrentWorkload { get; set; }
+
+        // todo these will essentially be sub forms that appear on the edit form
+        // we will have to implement special logic when saving
+        public BankAccountEditViewModel BankAccount { get; set; } = new();
+        public AddressEditViewModel Address { get; set; } = new();
     }
 }

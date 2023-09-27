@@ -8,5 +8,14 @@ namespace Jobbie.Db.Services
         public BankAccountService(ApplicationContext context) : base(context)
         {
         }
+
+        /// <inheritdoc />
+        public BankAccount Verify(BankAccount bankAccount)
+        {
+            bankAccount.IsVerified = true;
+            _context.BankAccounts.Update(bankAccount);
+            _context.SaveChanges();
+            return bankAccount;
+        }
     }
 }

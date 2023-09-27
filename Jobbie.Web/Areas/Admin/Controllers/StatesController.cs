@@ -9,20 +9,20 @@ using X.PagedList;
 namespace Jobbie.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AccountsController : Controller
+    public class StatesController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IAccountService _accountService;
+        private readonly IStateService _stateService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountsController"/> class.
+        /// Initializes a new instance of the <see cref="StatesController"/> class.
         /// </summary>
         /// <param name="mapper"></param>
-        /// <param name="accountService"></param>
-        public AccountsController(IMapper mapper, IAccountService accountService)
+        /// <param name="service"></param>
+        public StatesController(IMapper mapper, IStateService service)
         {
             _mapper = mapper;
-            _accountService = accountService;
+            _stateService = service;
         }
 
         /// <summary>
@@ -32,15 +32,15 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Index(int? page)
         {
-            IEnumerable<Account> accounts = _accountService.List();
+            IEnumerable<State> states = _stateService.List();
 
-            IPagedList<AccountViewModel> accountViewModels = accounts
+            IPagedList<StateViewModel> stateViewModels = states
                 .ToPagedList(page ?? 1, Constants.Constants.PageSize)
-                .Map<Account, AccountViewModel>(_mapper);
+                .Map<State, StateViewModel>(_mapper);
 
-            AccountIndexViewModel model = new AccountIndexViewModel
+            StateIndexViewModel model = new StateIndexViewModel
             {
-                Accounts = accountViewModels
+                States = stateViewModels
             };
 
             return View(model);
@@ -53,17 +53,16 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Edit(int? id)
         {
-            Account? account = id.HasValue
-                ? _accountService.Get(x => x.Id == id.Value)
-                : new Account();
+            State? state = id.HasValue
+                ? _stateService.Get(x => x.Id == id.Value)
+                : new State();
 
-            if (account == null)
+            if (state == null)
             {
                 return RedirectToAction("Index");
             }
 
-            AccountEditViewModel model = _mapper.Map<AccountEditViewModel>(account);
-            //InstantiateSelectLists(model);
+            StateEditViewModel model = _mapper.Map<StateEditViewModel>(state);
 
             return View(model);
         }
@@ -74,7 +73,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <param name="model">The model.</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Edit(AccountEditViewModel model)
+        public IActionResult Edit(StateEditViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -84,14 +83,14 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
             if (model.Id != 0)
             {
-                Account? account = _accountService.Get(x => x.Id == model.Id);
-                _mapper.Map(model, account);
-                _accountService.Update(account);
+                State? state = _stateService.Get(x => x.Id == model.Id);
+                _mapper.Map(model, state);
+                _stateService.Update(state);
             }
             else
             {
-                Account account = _mapper.Map<Account>(model);
-                _accountService.Create(account);
+                State state = _mapper.Map<State>(model);
+                _stateService.Create(state);
             }
 
             return RedirectToAction("Index");
@@ -99,31 +98,16 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
         public JsonResult Delete(int id)
         {
-            Account? account = _accountService.Get(x => x.Id == id);
+            State? state = _stateService.Get(x => x.Id == id);
 
-            if (account == null)
+            if (state == null)
             {
                 return Json(false);
             }
 
-            _accountService.Delete(account);
+            _stateService.Delete(state);
 
             return Json(true);
         }
-
-        public JsonResult Verify(int id)
-        {
-            Account? account = _accountService.Get(x => x.Id == id);
-
-            if (account == null)
-            {
-                return Json(false);
-            }
-
-            _accountService.Verify(account);
-
-            return Json(true);
-        }
-
     }
 }

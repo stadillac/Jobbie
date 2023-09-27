@@ -9,20 +9,20 @@ using X.PagedList;
 namespace Jobbie.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AccountsController : Controller
+    public class DisciplinesController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IAccountService _accountService;
+        private readonly IDisciplineService _disciplineService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountsController"/> class.
+        /// Initializes a new instance of the <see cref="DisciplinesController"/> class.
         /// </summary>
         /// <param name="mapper"></param>
-        /// <param name="accountService"></param>
-        public AccountsController(IMapper mapper, IAccountService accountService)
+        /// <param name="disciplineService"></param>
+        public DisciplinesController(IMapper mapper, IDisciplineService disciplineService)
         {
             _mapper = mapper;
-            _accountService = accountService;
+            _disciplineService = disciplineService;
         }
 
         /// <summary>
@@ -32,15 +32,15 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Index(int? page)
         {
-            IEnumerable<Account> accounts = _accountService.List();
+            IEnumerable<Discipline> disciplines = _disciplineService.List();
 
-            IPagedList<AccountViewModel> accountViewModels = accounts
+            IPagedList<DisciplineViewModel> disciplineViewModels = disciplines
                 .ToPagedList(page ?? 1, Constants.Constants.PageSize)
-                .Map<Account, AccountViewModel>(_mapper);
+                .Map<Discipline, DisciplineViewModel>(_mapper);
 
-            AccountIndexViewModel model = new AccountIndexViewModel
+            DisciplineIndexViewModel model = new DisciplineIndexViewModel
             {
-                Accounts = accountViewModels
+                Disciplines = disciplineViewModels
             };
 
             return View(model);
@@ -53,17 +53,16 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Edit(int? id)
         {
-            Account? account = id.HasValue
-                ? _accountService.Get(x => x.Id == id.Value)
-                : new Account();
+            Discipline? discipline = id.HasValue
+                ? _disciplineService.Get(x => x.Id == id.Value)
+                : new Discipline();
 
-            if (account == null)
+            if (discipline == null)
             {
                 return RedirectToAction("Index");
             }
 
-            AccountEditViewModel model = _mapper.Map<AccountEditViewModel>(account);
-            //InstantiateSelectLists(model);
+            DisciplineEditViewModel model = _mapper.Map<DisciplineEditViewModel>(discipline);
 
             return View(model);
         }
@@ -74,7 +73,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <param name="model">The model.</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Edit(AccountEditViewModel model)
+        public IActionResult Edit(DisciplineEditViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -84,14 +83,14 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
             if (model.Id != 0)
             {
-                Account? account = _accountService.Get(x => x.Id == model.Id);
-                _mapper.Map(model, account);
-                _accountService.Update(account);
+                Discipline? discipline = _disciplineService.Get(x => x.Id == model.Id);
+                _mapper.Map(model, discipline);
+                _disciplineService.Update(discipline);
             }
             else
             {
-                Account account = _mapper.Map<Account>(model);
-                _accountService.Create(account);
+                Discipline discipline = _mapper.Map<Discipline>(model);
+                _disciplineService.Create(discipline);
             }
 
             return RedirectToAction("Index");
@@ -99,31 +98,16 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
         public JsonResult Delete(int id)
         {
-            Account? account = _accountService.Get(x => x.Id == id);
+            Discipline? discipline = _disciplineService.Get(x => x.Id == id);
 
-            if (account == null)
+            if (discipline == null)
             {
                 return Json(false);
             }
 
-            _accountService.Delete(account);
+            _disciplineService.Delete(discipline);
 
             return Json(true);
         }
-
-        public JsonResult Verify(int id)
-        {
-            Account? account = _accountService.Get(x => x.Id == id);
-
-            if (account == null)
-            {
-                return Json(false);
-            }
-
-            _accountService.Verify(account);
-
-            return Json(true);
-        }
-
     }
 }

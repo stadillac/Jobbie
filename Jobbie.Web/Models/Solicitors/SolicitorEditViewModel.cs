@@ -2,5 +2,6 @@
 {
     public class SolicitorEditViewModel
     {
+        public int Id { get; set; }
     }
 }

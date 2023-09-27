@@ -6,7 +6,7 @@ namespace Jobbie.Web.Models
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public int JobSubtypeId { get; set; }
-        //public JobSubtypeViewModel? JobSubtype { get; set; }
+        public int ExpertiseId { get; set; }
+        public ExpertiseViewModel? Expertise { get; set; }
     }
 }

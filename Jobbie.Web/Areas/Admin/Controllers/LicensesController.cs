@@ -9,20 +9,20 @@ using X.PagedList;
 namespace Jobbie.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AccountsController : Controller
+    public class LicensesController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IAccountService _accountService;
+        private readonly ILicenseService _licenseService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountsController"/> class.
+        /// Initializes a new instance of the <see cref="LicensesController"/> class.
         /// </summary>
         /// <param name="mapper"></param>
-        /// <param name="accountService"></param>
-        public AccountsController(IMapper mapper, IAccountService accountService)
+        /// <param name="service"></param>
+        public LicensesController(IMapper mapper, ILicenseService service)
         {
             _mapper = mapper;
-            _accountService = accountService;
+            _licenseService = service;
         }
 
         /// <summary>
@@ -32,15 +32,15 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Index(int? page)
         {
-            IEnumerable<Account> accounts = _accountService.List();
+            IEnumerable<License> licenses = _licenseService.List();
 
-            IPagedList<AccountViewModel> accountViewModels = accounts
+            IPagedList<LicenseViewModel> licenseViewModels = licenses
                 .ToPagedList(page ?? 1, Constants.Constants.PageSize)
-                .Map<Account, AccountViewModel>(_mapper);
+                .Map<License, LicenseViewModel>(_mapper);
 
-            AccountIndexViewModel model = new AccountIndexViewModel
+            LicenseIndexViewModel model = new LicenseIndexViewModel
             {
-                Accounts = accountViewModels
+                Licenses = licenseViewModels
             };
 
             return View(model);
@@ -53,17 +53,16 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Edit(int? id)
         {
-            Account? account = id.HasValue
-                ? _accountService.Get(x => x.Id == id.Value)
-                : new Account();
+            License? license = id.HasValue
+                ? _licenseService.Get(x => x.Id == id.Value)
+                : new License();
 
-            if (account == null)
+            if (license == null)
             {
                 return RedirectToAction("Index");
             }
 
-            AccountEditViewModel model = _mapper.Map<AccountEditViewModel>(account);
-            //InstantiateSelectLists(model);
+            LicenseEditViewModel model = _mapper.Map<LicenseEditViewModel>(license);
 
             return View(model);
         }
@@ -74,24 +73,23 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <param name="model">The model.</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Edit(AccountEditViewModel model)
+        public IActionResult Edit(LicenseEditViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                //InstantiateSelectLists(model);
                 return View(model);
             }
 
             if (model.Id != 0)
             {
-                Account? account = _accountService.Get(x => x.Id == model.Id);
-                _mapper.Map(model, account);
-                _accountService.Update(account);
+                License? license = _licenseService.Get(x => x.Id == model.Id);
+                _mapper.Map(model, license);
+                _licenseService.Update(license);
             }
             else
             {
-                Account account = _mapper.Map<Account>(model);
-                _accountService.Create(account);
+                License license = _mapper.Map<License>(model);
+                _licenseService.Create(license);
             }
 
             return RedirectToAction("Index");
@@ -99,31 +97,30 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
         public JsonResult Delete(int id)
         {
-            Account? account = _accountService.Get(x => x.Id == id);
+            License? license = _licenseService.Get(x => x.Id == id);
 
-            if (account == null)
+            if (license == null)
             {
                 return Json(false);
             }
 
-            _accountService.Delete(account);
+            _licenseService.Delete(license);
 
             return Json(true);
         }
 
         public JsonResult Verify(int id)
         {
-            Account? account = _accountService.Get(x => x.Id == id);
+            License? license = _licenseService.Get(x => x.Id == id);
 
-            if (account == null)
+            if (license == null)
             {
                 return Json(false);
             }
 
-            _accountService.Verify(account);
+            _licenseService.Verify(license);
 
             return Json(true);
         }
-
     }
 }

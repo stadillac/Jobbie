@@ -63,7 +63,6 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             }
 
             BankAccountEditViewModel model = _mapper.Map<BankAccountEditViewModel>(account);
-            //InstantiateSelectLists(model);
 
             return View(model);
         }
@@ -78,7 +77,6 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //InstantiateSelectLists(model);
                 return View(model);
             }
 
@@ -107,6 +105,19 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             }
 
             _bankAccountService.Delete(account);
+
+            return Json(true);
+        }
+        public JsonResult Verify(int id)
+        {
+            BankAccount? account = _bankAccountService.Get(x => x.Id == id);
+
+            if (account == null)
+            {
+                return Json(false);
+            }
+
+            _bankAccountService.Verify(account);
 
             return Json(true);
         }
