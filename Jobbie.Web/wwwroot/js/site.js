@@ -43,6 +43,32 @@ function softDelete(targetUrl, targetId, elem) {
     });
 }
 
+function verify(targetUrl, targetId, elem) {
+    var row = elem.closest('tr');
+    var obj = $(elem).parent().parent();
+
+    $.ajax({
+        type: "POST",
+        url: targetUrl,
+        data: { id: targetId },
+        success: function (result) {
+
+            $('#successful-toast').toast('show');
+
+            obj.fadeTo(10, 1, () => {
+                obj.children('td', 'th')
+                    .animate({ 'padding-top': '0', 'padding-bottom': '0' })
+                    .wrapInner('<div />')
+                    .children()
+                    .slideUp(100, () => { obj.remove(); });
+            });
+        },
+        error: function (data) {
+            $('#failed-toast').toast('show');
+        }
+    });
+}
+
 $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
     if (!$(this).next().hasClass('show')) {
         $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");

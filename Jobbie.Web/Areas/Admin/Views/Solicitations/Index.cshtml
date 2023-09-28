@@ -1,24 +1,25 @@
 ﻿@using X.PagedList.Mvc.Core
 @using Jobbie.Web.Models
 
-@model AccountIndexViewModel
+@model SolicitationIndexViewModel
 
 <div class="row mt-4">
     <div class="col">
-        <h2>Accounts</h2>
+        <h2>Solicitations</h2>
         <hr />
     </div>
 </div>
 <div class="row mt-4">
     <div class="col">
-        <a class="btn btn-primary" asp-area="Admin" asp-controller="Accounts" asp-action="Edit">New</a>
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="Solicitations" asp-action="Edit">New</a>
     </div>
 </div>
 <div class="row mt-4">
     <div class="col">
-        <h4>Current Accounts</h4>
+        <h4>Current Solicitations</h4>
     </div>
 </div>
+
 <!--TODO Filters-->
 
 <div class="row mt-2">
@@ -26,26 +27,26 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Username</th>
+                    <th scope="col">TODO</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (AccountViewModel item in Model.Accounts)
+                @foreach (SolicitationViewModel item in Model.Solicitations)
                 {
                     <tr>
-                        <td>@item.Username</td>
+                        <td>TODO</td>
                         <td>
-                            <a href="/Accounts/Edit/@item.Id" class="btn btn-primary">Edit</a>
+                            <a href="/Solicitations/Edit/@item.Id" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
-                            <a href="javascript:void(0);" class="btn btn-danger" onclick="softDelete('/Accounts/Delete', @item.Id, this)">Delete</a>
+                            <a href="javascript:void(0);" class="btn btn-danger" onclick="softDelete('/Solicitations/Delete', @item.Id, this)">Delete</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-        @Html.PagedListPager(Model.Accounts, page => Url.Action("Index", new { page }), Jobbie.Web.Helpers.HtmlHelper.PagedListRenderOptions)
+        @Html.PagedListPager(Model.Solicitations, page => Url.Action("Index", new { page }), Jobbie.Web.Helpers.HtmlHelper.PagedListRenderOptions)
     </div>
 </div>

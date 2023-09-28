@@ -1,22 +1,22 @@
 ﻿@using X.PagedList.Mvc.Core
 @using Jobbie.Web.Models
 
-@model AccountIndexViewModel
+@model BankAccountIndexViewModel
 
 <div class="row mt-4">
     <div class="col">
-        <h2>Accounts</h2>
+        <h2>Bank Accounts</h2>
         <hr />
     </div>
 </div>
 <div class="row mt-4">
     <div class="col">
-        <a class="btn btn-primary" asp-area="Admin" asp-controller="Accounts" asp-action="Edit">New</a>
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="BankAccounts" asp-action="Edit">New</a>
     </div>
 </div>
 <div class="row mt-4">
     <div class="col">
-        <h4>Current Accounts</h4>
+        <h4>Current Bank Accounts</h4>
     </div>
 </div>
 <!--TODO Filters-->
@@ -32,20 +32,20 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (AccountViewModel item in Model.Accounts)
+                @foreach (BankAccountViewModel item in Model.BankAccounts)
                 {
                     <tr>
-                        <td>@item.Username</td>
+                        <td>@item.BankName</td>
                         <td>
-                            <a href="/Accounts/Edit/@item.Id" class="btn btn-primary">Edit</a>
+                            <a href="/BankAccounts/Edit/@item.Id" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
-                            <a href="javascript:void(0);" class="btn btn-danger" onclick="softDelete('/Accounts/Delete', @item.Id, this)">Delete</a>
+                            <a href="javascript:void(0);" class="btn btn-danger" onclick="softDelete('/BankAccounts/Delete', @item.Id, this)">Delete</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-        @Html.PagedListPager(Model.Accounts, page => Url.Action("Index", new { page }), Jobbie.Web.Helpers.HtmlHelper.PagedListRenderOptions)
+        @Html.PagedListPager(Model.BankAccounts, page => Url.Action("Index", new { page }), Jobbie.Web.Helpers.HtmlHelper.PagedListRenderOptions)
     </div>
 </div>
