@@ -1,4 +1,6 @@
-﻿namespace Jobbie.Web.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace Jobbie.Web.Models
 {
     public class LicenseEditViewModel
     {
@@ -6,6 +8,7 @@
 
         // todo this will need a dropdown
         public int StateId { get; set; }
+        public SelectList? States { get; set; }
 
         public string Name { get; set; } = string.Empty;
         public int Level { get; set; }

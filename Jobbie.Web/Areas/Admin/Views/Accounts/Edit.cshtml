@@ -152,14 +152,14 @@
                             <div class="col">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Address.ZipCode, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.Address.ZipCode, new { htmlAttributes = new { @class = "form-control", @disabled="disabled" } })
+                                    @Html.EditorFor(model => model.Address.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Address.ZipCode, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Address.Country, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.Address.Country, new { htmlAttributes = new { @class = "form-control", @disabled="disabled" } })
+                                    @Html.EditorFor(model => model.Address.Country, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Address.Country, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -178,7 +178,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.BankAccount.BankName, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.BankAccount.BankName, new { htmlAttributes = new { @class = "form-control", @disabled="disabled" } })
+                                    @Html.EditorFor(model => model.BankAccount.BankName, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.BankAccount.BankName, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -187,21 +187,21 @@
                             <div class="col">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.BankAccount.AccountType, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.BankAccount.AccountType, new { htmlAttributes = new { @class = "form-control", @disabled="disabled" } })
+                                    @Html.EditorFor(model => model.BankAccount.AccountType, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.BankAccount.AccountType, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.BankAccount.RoutingNumber, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.BankAccount.RoutingNumber, new { htmlAttributes = new { @class = "form-control", @disabled="disabled" } })
+                                    @Html.EditorFor(model => model.BankAccount.RoutingNumber, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.BankAccount.RoutingNumber, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.BankAccount.AccountNumber, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.BankAccount.AccountNumber, new { htmlAttributes = new { @class = "form-control", @disabled="disabled" } })
+                                    @Html.EditorFor(model => model.BankAccount.AccountNumber, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.BankAccount.AccountNumber, "", new { @class = "text-danger" })
                                 </div>
                             </div>

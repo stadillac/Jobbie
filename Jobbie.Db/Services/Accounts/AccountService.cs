@@ -12,10 +12,12 @@ namespace Jobbie.Db.Services
 
         public override Account Create(Account entity)
         {
-            var userName = $"{entity.FirstName.Substring(1)}{entity.LastName}";
+            var userName = $"{entity.FirstName.Substring(0, 1)}{entity.LastName}";
+
+            var possibleDuplicateUsernames = _context.Accounts.Where(x => x.Username.Contains(userName)).ToList();
 
             // if we have an account with the generated username
-            if (_context.Accounts.Any(x => x.Username.RemoveDigits().Equals(userName)))
+            if (possibleDuplicateUsernames.Any(x => x.Username.RemoveDigits().Equals(userName)))
             {
                 // get a count of how many accounts have the same user name
                 int count = _context.Accounts.Count(x => x.Username.RemoveDigits().Equals(userName));

@@ -4,6 +4,7 @@ using Jobbie.Db.Services;
 using Jobbie.Web.Extensions;
 using Jobbie.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
 
 namespace Jobbie.Web.Areas.Admin.Controllers
@@ -13,16 +14,29 @@ namespace Jobbie.Web.Areas.Admin.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IContractorService _contractorService;
+        private readonly IDisciplineService _disciplineService;
+        private readonly IProfessionService _professionService;
+        private readonly IProfessionDisciplineService _professionDisciplineService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ContractorsController"/> class.
         /// </summary>
-        /// <param name="mapper"></param>
-        /// <param name="contractorService"></param>
-        public ContractorsController(IMapper mapper, IContractorService contractorService)
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="contractorService">The contractor service.</param>
+        /// <param name="disciplineService">The discipline service.</param>
+        /// <param name="professionService">The profession service.</param>
+        /// <param name="professionDisciplineService">The profession discipline service.</param>
+        public ContractorsController(IMapper mapper, 
+            IContractorService contractorService, 
+            IDisciplineService disciplineService, 
+            IProfessionService professionService, 
+            IProfessionDisciplineService professionDisciplineService)
         {
             _mapper = mapper;
             _contractorService = contractorService;
+            _disciplineService = disciplineService;
+            _professionService = professionService;
+            _professionDisciplineService = professionDisciplineService;
         }
 
         /// <summary>
@@ -63,6 +77,8 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             }
 
             ContractorEditViewModel model = _mapper.Map<ContractorEditViewModel>(contractor);
+            InstantiateRelatedModels(model);
+            InstantiateSelectLists(model);
 
             return View(model);
         }
@@ -77,9 +93,12 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //InstantiateSelectLists(model);
+                InstantiateRelatedModels(model);
+                InstantiateSelectLists(model);
                 return View(model);
             }
+
+
 
             if (model.Id != 0)
             {
@@ -108,6 +127,17 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             _contractorService.Delete(contractor);
 
             return Json(true);
+        }
+
+        private void InstantiateRelatedModels(ContractorEditViewModel model)
+        {
+            model.ProfessionDiscipline = model.ProfessionDiscipline ?? new();
+        }
+
+        private void InstantiateSelectLists(ContractorEditViewModel model)
+        {
+            model.Disciplines = new SelectList(_disciplineService.List(), "Id", "Name", model.ProfessionDiscipline.DisciplineId);
+            model.Professions = new SelectList(_professionService.List(), "Id", "Name", model.ProfessionDiscipline.ProfessionId);
         }
     }
 }
