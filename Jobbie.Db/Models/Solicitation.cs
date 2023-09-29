@@ -64,7 +64,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The start date.
         /// </value>
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.Now;
 
         /// <summary>
         /// Gets or sets the city.
@@ -104,7 +104,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The estimated end date.
         /// </value>
-        public DateTime EstimatedEndDate { get; set; }
+        public DateTime EstimatedEndDate { get; set; } = DateTime.Now;
 
         /// <summary>
         /// Gets or sets the team meeting time.
@@ -112,7 +112,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The team meeting time.
         /// </value>
-        public DateTime TeamMeetingTime { get; set; }
+        public DateTime TeamMeetingTime { get; set; } = DateTime.Now;
 
         /// <summary>
         /// Navigational property. Gets or sets the solicitor.
