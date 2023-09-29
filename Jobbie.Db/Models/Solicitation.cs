@@ -88,7 +88,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The state.
         /// </value>
-        public string State { get; set; } = string.Empty;
+        public int StateId { get; set; }
 
         /// <summary>
         /// Gets or sets the shared drive URL.
@@ -146,5 +146,14 @@ namespace Jobbie.Db.Models
         /// </value>
         /// <remarks>The required roles for the solicitation.</remarks>
         public virtual ICollection<SolicitationRole> Roles { get; set; } = new Collection<SolicitationRole>();
+
+        /// <summary>
+        /// Gets or sets the states.
+        /// </summary>
+        /// <value>
+        /// The states.
+        /// </value>
+        public virtual ICollection<State> States { get; set; } = new Collection<State>();
+
     }
 }
