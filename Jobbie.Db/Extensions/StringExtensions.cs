@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Jobbie.Web.Extensions
+namespace Jobbie.Db.Extensions
 {
     public static class StringExtensions
     {
@@ -14,7 +14,7 @@ namespace Jobbie.Web.Extensions
             return s.Contains(compare, StringComparison.OrdinalIgnoreCase);
         }
 
-        public static string RemoveDigits(this string key)
+        public static string  RemoveDigits(this string key)
         {
             return Regex.Replace(key, @"\d", "");
         }

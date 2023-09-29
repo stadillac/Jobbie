@@ -7,7 +7,10 @@ namespace Jobbie.Web.Models
     public class AccountEditViewModel
     {
         public int Id { get; set; }
-
+        public int AddressId { get; set; }
+        public int BankAccountId { get; set; }
+        public int ContractorId { get; set; }
+        public int? SolicitorId { get; set; }
 
         [Required]
         [DisplayName("First Name")]
@@ -30,25 +33,24 @@ namespace Jobbie.Web.Models
         [DisplayName("Phone")]
         public string PhoneNumber { get; set; } = string.Empty;
 
-        // todo requires dropdown
-        public int ContractorId { get; set; }
+        [Required]
+        [DisplayName("SSN")]
+        public string SocialSecurityNumber { get; set; } = string.Empty;
 
-        // todo requires dropdown
-        public int? SolicitorId { get; set; }
+        [Required]
+        [DisplayName("Hours Available Per Week")]
+        public int HoursAvailablePerWeek { get; set; }
 
-        
-        public string Username { get; set; } = string.Empty;
+        [DisplayName("Current Workload (Hours per Week)")]
+        public int CurrentWorkload { get; set; } // todo this should be calculated in mapping profile
+        public bool IsVerified { get; set; }
+        public string EmployerIdentificationNumber { get; set; } = string.Empty;
         public string CompanyName { get; set; } = string.Empty;
         public int? CompanyTypeId { get; set; }
-        public string EmployerIdentificationNumber { get; set; } = string.Empty;
-        public string SocialSecurityNumber { get; set; } = string.Empty;
-        public bool IsVerified { get; set; }
-        public int HoursAvailablePerWeek { get; set; }
-        public int CurrentWorkload { get; set; }
 
-        // todo these will essentially be sub forms that appear on the edit form
-        // we will have to implement special logic when saving
         public BankAccountEditViewModel BankAccount { get; set; } = new();
         public AddressEditViewModel Address { get; set; } = new();
+        public ContractorEditViewModel Contractor { get; set; } = new();
+        public SolicitorEditViewModel Solicitor { get; set; } = new();
     }
 }

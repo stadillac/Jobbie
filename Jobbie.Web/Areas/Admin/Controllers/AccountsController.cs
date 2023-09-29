@@ -4,6 +4,7 @@ using Jobbie.Db.Services;
 using Jobbie.Web.Extensions;
 using Jobbie.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
 
 namespace Jobbie.Web.Areas.Admin.Controllers
@@ -13,16 +14,18 @@ namespace Jobbie.Web.Areas.Admin.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IAccountService _accountService;
+        private readonly IStateService _stateService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountsController"/> class.
         /// </summary>
         /// <param name="mapper"></param>
         /// <param name="accountService"></param>
-        public AccountsController(IMapper mapper, IAccountService accountService)
+        public AccountsController(IMapper mapper, IAccountService accountService, IStateService stateService)
         {
             _mapper = mapper;
             _accountService = accountService;
+            _stateService = stateService;
         }
 
         /// <summary>
@@ -63,7 +66,8 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             }
 
             AccountEditViewModel model = _mapper.Map<AccountEditViewModel>(account);
-            //InstantiateSelectLists(model);
+            InstantiateRelatedModels(model);
+            InstantiateSelectLists(model);
 
             return View(model);
         }
@@ -78,7 +82,8 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //InstantiateSelectLists(model);
+                InstantiateRelatedModels(model);
+                InstantiateSelectLists(model);
                 return View(model);
             }
 
@@ -125,5 +130,17 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             return Json(true);
         }
 
+        private void InstantiateRelatedModels(AccountEditViewModel model)
+        {
+            model.Address = model.Address ?? new();
+            model.BankAccount = model.BankAccount ?? new();
+            model.Contractor = model.Contractor ?? new();
+            model.Solicitor = model.Solicitor ?? new();
+        }
+
+        private void InstantiateSelectLists(AccountEditViewModel model)
+        {
+            model.Address.States = new SelectList(_stateService.List(), "Id", "Name", model.Address.StateId);
+        }
     }
 }
