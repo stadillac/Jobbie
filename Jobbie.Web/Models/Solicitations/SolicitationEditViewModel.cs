@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Jobbie.Web.Models
@@ -17,9 +18,6 @@ namespace Jobbie.Web.Models
 
         [Required]
         public string County { get; set; } = string.Empty;
-
-        [Required]
-        public string State { get; set; } = string.Empty;
         
         [DisplayName("Shared Drive Url")]
         public string SharedDriveUrl { get; set; } = string.Empty;
@@ -29,8 +27,8 @@ namespace Jobbie.Web.Models
         [DataType(DataType.Date)]
         public DateTime EstimatedEndDate { get; set; }
 
-        [Required]
         [DisplayName("Team Meeting Time")]
+        [DataType(DataType.Time)]
         public DateTime TeamMeetingTime { get; set; }
 
         [DisplayName("Active")]
@@ -44,5 +42,11 @@ namespace Jobbie.Web.Models
 
         [DisplayName("Cancelled")]
         public bool IsCancelled { get; set; }
+
+        [Required]
+        [DisplayName("State")]
+        public int StateId { get; set; }
+
+        public SelectList? States { get; set; }
     }
 }

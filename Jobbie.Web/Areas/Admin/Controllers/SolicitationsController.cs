@@ -4,6 +4,7 @@ using Jobbie.Db.Services;
 using Jobbie.Web.Extensions;
 using Jobbie.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
 
 namespace Jobbie.Web.Areas.Admin.Controllers
@@ -13,16 +14,18 @@ namespace Jobbie.Web.Areas.Admin.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ISolicitationService _solicitationService;
+        private readonly IStateService _stateService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SolicitationsController"/> class.
         /// </summary>
         /// <param name="mapper"></param>
         /// <param name="service"></param>
-        public SolicitationsController(IMapper mapper, ISolicitationService service)
+        public SolicitationsController(IMapper mapper, ISolicitationService service, IStateService stateService)
         {
             _mapper = mapper;
             _solicitationService = service;
+            _stateService = stateService;
         }
 
         /// <summary>
@@ -63,6 +66,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             }
 
             SolicitationEditViewModel model = _mapper.Map<SolicitationEditViewModel>(solicitation);
+            InstantiateSelectLists(model);
 
             return View(model);
         }
@@ -77,6 +81,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                InstantiateSelectLists(model);
                 return View(model);
             }
 
@@ -162,6 +167,11 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             _solicitationService.Cancel(solicitation, isCancelled);
 
             return Json(true);
+        }
+
+        private void InstantiateSelectLists(SolicitationEditViewModel model)
+        {
+            model.States = new SelectList(_stateService.List(), "Id", "Name", model.StateId);
         }
     }
 }

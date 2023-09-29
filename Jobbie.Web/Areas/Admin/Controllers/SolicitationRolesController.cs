@@ -4,6 +4,7 @@ using Jobbie.Db.Services;
 using Jobbie.Web.Extensions;
 using Jobbie.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
 
 namespace Jobbie.Web.Areas.Admin.Controllers
@@ -13,17 +14,27 @@ namespace Jobbie.Web.Areas.Admin.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ISolicitationRoleService _solicitationRoleService;
+        private readonly ISolicitationService _solicitationService;
+        private readonly IProjectDeliverableService _projectDeliverableService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SolicitationRolesController"/> class.
         /// </summary>
-        /// <param name="mapper"></param>
-        /// <param name="service"></param>
-        public SolicitationRolesController(IMapper mapper, ISolicitationRoleService service)
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="solicitationRoleService">The solicitation role service.</param>
+        /// <param name="solicitationService">The solicitation service.</param>
+        /// <param name="projectDeliverableService">The project deliverable service.</param>
+        public SolicitationRolesController(IMapper mapper, 
+            ISolicitationRoleService solicitationRoleService, 
+            ISolicitationService solicitationService, 
+            IProjectDeliverableService projectDeliverableService)
         {
             _mapper = mapper;
-            _solicitationRoleService = service;
+            _solicitationRoleService = solicitationRoleService;
+            _solicitationService = solicitationService;
+            _projectDeliverableService = projectDeliverableService;
         }
+
 
         /// <summary>
         /// Indexes the specified page.
@@ -63,6 +74,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             }
 
             SolicitationRoleEditViewModel model = _mapper.Map<SolicitationRoleEditViewModel>(solicitationRole);
+            InstantiateSelectLists(model);
 
             return View(model);
         }
@@ -77,6 +89,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                InstantiateSelectLists(model);
                 return View(model);
             }
 
@@ -177,6 +190,12 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             _solicitationRoleService.Delete(solicitationRole);
 
             return Json(true);
+        }
+        
+        private void InstantiateSelectLists(SolicitationRoleEditViewModel model)
+        {
+            model.Solicitations = new SelectList(_solicitationService.List(), "Id", "Name", model.SolicitationId);
+            model.ProjectDeliverables = new SelectList(_projectDeliverableService.List(), "Id", "Name", model.ProjectDeliverableId);
         }
     }
 }

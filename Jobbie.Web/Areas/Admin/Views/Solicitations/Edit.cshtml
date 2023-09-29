@@ -52,9 +52,9 @@
             </div>
             <div class="col">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.StateId, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.StateId, Model.States, Jobbie.Web.Constants.Constants.EmptySelectOptionText, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -97,6 +97,7 @@
                 </div>
             </div>
         </div>
+        <hr />
         <div class="row">
             <div class="col">
                 <div class="form-group">
