@@ -221,6 +221,36 @@
         </div>
         <div class="row">
             <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        Contractor Info
+                    </div>
+                    <div class="card-body">
+                        @Html.HiddenFor(model => model.ContractorId)
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Contractor.ProfessionDisciplineId, htmlAttributes: new { @class = "control-label" })
+                                    @Html.DropDownListFor(model => model.Contractor.ProfessionDisciplineId, Model.Contractor.ProfessionDisciplines, Jobbie.Web.Constants.Constants.EmptySelectOptionText, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Contractor.ProfessionDisciplineId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input type="submit" value="Save" class="btn btn-primary" />
+                                    <a class="btn btn-primary" asp-area="Admin" asp-controller="Contractors" asp-action="Index">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />
                     <a class="btn btn-primary" href="/Buyers">Cancel</a>

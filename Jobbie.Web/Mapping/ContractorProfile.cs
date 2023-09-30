@@ -9,23 +9,7 @@ namespace Jobbie.Web.Mapping
         public ContractorProfile()
         {
             CreateMap<Contractor, ContractorViewModel>().ReverseMap();
-            CreateMap<Contractor, ContractorEditViewModel>()
-                .ForMember(
-                    dest => dest.ProfessionId, 
-                    opt => opt.MapFrom(
-                        src => (src.ProfessionDiscipline != null ? src.ProfessionDiscipline.ProfessionId : 0)
-                    )
-                )
-                .ForMember(
-                    dest => dest.DisciplineId,
-                    opt => opt.MapFrom(
-                        src => (src.ProfessionDiscipline != null ? src.ProfessionDiscipline.DisciplineId : 0)
-                    )
-                );
-
-            // TODO Stopped here
-            //CreateMap<ContractorEditViewModel, Contractor>()
-            //    .ForMember(dest => dest.ProfessionDiscipline, opt => opt.)
+            CreateMap<Contractor, ContractorEditViewModel>().ReverseMap();
         }
     }
 }

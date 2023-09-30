@@ -14,6 +14,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IAccountService _accountService;
+        private readonly IProfessionDisciplineService _professionDisciplineService;
         private readonly IStateService _stateService;
 
         /// <summary>
@@ -21,10 +22,14 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// </summary>
         /// <param name="mapper"></param>
         /// <param name="accountService"></param>
-        public AccountsController(IMapper mapper, IAccountService accountService, IStateService stateService)
+        public AccountsController(IMapper mapper, 
+            IAccountService accountService, 
+            IProfessionDisciplineService professionDisciplineService, 
+            IStateService stateService)
         {
             _mapper = mapper;
             _accountService = accountService;
+            _professionDisciplineService = professionDisciplineService;
             _stateService = stateService;
         }
 
@@ -141,6 +146,15 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         private void InstantiateSelectLists(AccountEditViewModel model)
         {
             model.Address.States = new SelectList(_stateService.List(), "Id", "Name", model.Address.StateId);
+            model.Contractor.ProfessionDisciplines = new SelectList(
+                _professionDisciplineService
+                    .List()
+                    .OrderBy(x => x.Profession.Name)
+                    .ThenBy(x => x.Discipline.Name),
+                "Id",
+                "Name",
+                model.Contractor.ProfessionDisciplineId
+            );
         }
     }
 }

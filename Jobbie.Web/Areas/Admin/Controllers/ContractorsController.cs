@@ -14,8 +14,6 @@ namespace Jobbie.Web.Areas.Admin.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IContractorService _contractorService;
-        private readonly IDisciplineService _disciplineService;
-        private readonly IProfessionService _professionService;
         private readonly IProfessionDisciplineService _professionDisciplineService;
 
         /// <summary>
@@ -28,14 +26,10 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <param name="professionDisciplineService">The profession discipline service.</param>
         public ContractorsController(IMapper mapper, 
             IContractorService contractorService, 
-            IDisciplineService disciplineService, 
-            IProfessionService professionService, 
             IProfessionDisciplineService professionDisciplineService)
         {
             _mapper = mapper;
             _contractorService = contractorService;
-            _disciplineService = disciplineService;
-            _professionService = professionService;
             _professionDisciplineService = professionDisciplineService;
         }
 
@@ -131,13 +125,20 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
         private void InstantiateRelatedModels(ContractorEditViewModel model)
         {
-            model.ProfessionDiscipline = model.ProfessionDiscipline ?? new();
+            model.Account = model.Account ?? new();
         }
 
         private void InstantiateSelectLists(ContractorEditViewModel model)
         {
-            model.Disciplines = new SelectList(_disciplineService.List(), "Id", "Name", model.ProfessionDiscipline.DisciplineId);
-            model.Professions = new SelectList(_professionService.List(), "Id", "Name", model.ProfessionDiscipline.ProfessionId);
+            model.ProfessionDisciplines = new SelectList(
+                _professionDisciplineService
+                    .List()
+                    .OrderBy(x => x.Profession.Name)
+                    .ThenBy(x => x.Discipline.Name), 
+                "Id", 
+                "Name", 
+                model.ProfessionDisciplineId
+            );
         }
     }
 }
