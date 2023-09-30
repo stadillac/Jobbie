@@ -14,6 +14,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IAccountService _accountService;
+        private readonly ICompanyTypeService _companyTypeService;
         private readonly IProfessionDisciplineService _professionDisciplineService;
         private readonly IStateService _stateService;
 
@@ -24,11 +25,13 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         /// <param name="accountService"></param>
         public AccountsController(IMapper mapper, 
             IAccountService accountService, 
+            ICompanyTypeService companyTypeService,
             IProfessionDisciplineService professionDisciplineService, 
             IStateService stateService)
         {
             _mapper = mapper;
             _accountService = accountService;
+            _companyTypeService = companyTypeService;
             _professionDisciplineService = professionDisciplineService;
             _stateService = stateService;
         }
@@ -92,6 +95,11 @@ namespace Jobbie.Web.Areas.Admin.Controllers
                 return View(model);
             }
 
+            if (model.IsSolicitor && model.SolicitorId == null)
+            {
+                model.Solicitor = new();
+            }
+
             if (model.Id != 0)
             {
                 Account? account = _accountService.Get(x => x.Id == model.Id);
@@ -140,7 +148,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             model.Address = model.Address ?? new();
             model.BankAccount = model.BankAccount ?? new();
             model.Contractor = model.Contractor ?? new();
-            model.Solicitor = model.Solicitor ?? new();
+            //model.Solicitor = model.Solicitor ?? new();
         }
 
         private void InstantiateSelectLists(AccountEditViewModel model)
@@ -155,6 +163,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
                 "Name",
                 model.Contractor.ProfessionDisciplineId
             );
+            model.CompanyTypes = new SelectList(_companyTypeService.List(), "Id", "Name", model.CompanyTypeId);
         }
     }
 }

@@ -51,6 +51,13 @@
                                     @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SocialSecurityNumber, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.SocialSecurityNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SocialSecurityNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col">
@@ -58,13 +65,6 @@
                                     @Html.LabelFor(model => model.AboutMe, htmlAttributes: new { @class = "control-label" })
                                     @Html.TextAreaFor(model => model.AboutMe, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.AboutMe, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.SocialSecurityNumber, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.SocialSecurityNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.SocialSecurityNumber, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -226,8 +226,7 @@
                         Contractor Info
                     </div>
                     <div class="card-body">
-                        @Html.HiddenFor(model => model.ContractorId)
-
+                        @Html.HiddenFor(model => model.Contractor.Id)
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -237,11 +236,37 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        Company Info
+                    </div>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <input type="submit" value="Save" class="btn btn-primary" />
-                                    <a class="btn btn-primary" asp-area="Admin" asp-controller="Contractors" asp-action="Index">Cancel</a>
+                                    @Html.LabelFor(model => model.CompanyTypeId, htmlAttributes: new { @class = "control-label" })
+                                    @Html.DropDownListFor(model => model.CompanyTypeId, Model.CompanyTypes, Jobbie.Web.Constants.Constants.EmptySelectOptionText, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CompanyTypeId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    @Html.CheckBoxFor(model => model.IsSolicitor, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.IsSolicitor, htmlAttributes: new { @class = "control-label" })
+                                    @Html.ValidationMessageFor(model => model.IsSolicitor, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>

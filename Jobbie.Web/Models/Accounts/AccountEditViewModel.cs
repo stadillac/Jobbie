@@ -1,4 +1,5 @@
 ﻿using Jobbie.Db.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -43,10 +44,23 @@ namespace Jobbie.Web.Models
 
         [DisplayName("Current Workload (Hours per Week)")]
         public int CurrentWorkload { get; set; } // todo this should be calculated in mapping profile
+
+        [DisplayName("Verified")]
         public bool IsVerified { get; set; }
+
+        [DisplayName("Employer Identification Number")]
         public string EmployerIdentificationNumber { get; set; } = string.Empty;
+
+        [DisplayName("Company Name")]
         public string CompanyName { get; set; } = string.Empty;
+
         public int? CompanyTypeId { get; set; }
+
+        [DisplayName("Company Type")]
+        public SelectList? CompanyTypes { get; set; }
+
+        [DisplayName("Solicitor?")]
+        public bool IsSolicitor { get; set; }
 
         public BankAccountEditViewModel BankAccount { get; set; } = new();
         public AddressEditViewModel Address { get; set; } = new();

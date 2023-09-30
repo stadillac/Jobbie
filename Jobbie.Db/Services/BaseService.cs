@@ -1,4 +1,5 @@
 ﻿using Jobbie.Db.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Jobbie.Db.Services
@@ -31,19 +32,19 @@ namespace Jobbie.Db.Services
         }
 
         /// <inheritdoc />
-        public T? Get(Expression<Func<T, bool>> predicate)
+        public virtual T? Get(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().Where(predicate).FirstOrDefault();
         }
 
         /// <inheritdoc />
-        public ICollection<T> List()
+        public virtual ICollection<T> List()
         {
             return _context.Set<T>().ToList();
         }
 
         /// <inheritdoc />
-        public ICollection<T> List(Expression<Func<T, bool>> predicate)
+        public virtual ICollection<T> List(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().Where(predicate).ToList();
         }

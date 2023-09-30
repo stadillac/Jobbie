@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Jobbie.Db.Models
 {
@@ -48,5 +49,20 @@ namespace Jobbie.Db.Models
         /// The contractors.
         /// </value>
         public virtual ICollection<Contractor> Contractors { get; set; } = new Collection<Contractor>();
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        [NotMapped]
+        public string Name
+        {
+            get
+            {
+                return $"{this.Profession?.Name} - {this.Discipline?.Name}";
+            }
+        }
     }
 }

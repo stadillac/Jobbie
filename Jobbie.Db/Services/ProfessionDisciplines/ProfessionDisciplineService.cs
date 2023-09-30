@@ -1,4 +1,5 @@
 ﻿using Jobbie.Db.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jobbie.Db.Services
 {
@@ -7,6 +8,14 @@ namespace Jobbie.Db.Services
     {
         public ProfessionDisciplineService(ApplicationContext context) : base(context)
         {
+        }
+
+        public override ICollection<ProfessionDiscipline> List()
+        {
+            return _context.ProfessionDisciplines
+                .Include(x => x.Profession)
+                .Include(x => x.Discipline)
+                .ToList();
         }
     }
 }

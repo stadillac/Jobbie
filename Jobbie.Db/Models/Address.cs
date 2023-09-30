@@ -20,7 +20,7 @@
         /// <value>
         /// The address2.
         /// </value>
-        public string Address2 { get; set; } = string.Empty;
+        public string? Address2 { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the city.
