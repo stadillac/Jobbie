@@ -4,6 +4,7 @@ using Jobbie.Db.Services;
 using Jobbie.Web.Extensions;
 using Jobbie.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
 
 namespace Jobbie.Web.Areas.Admin.Controllers
@@ -12,17 +13,24 @@ namespace Jobbie.Web.Areas.Admin.Controllers
     public class LicensesController : Controller
     {
         private readonly IMapper _mapper;
+        private readonly IAccountService _accountService;
         private readonly ILicenseService _licenseService;
+        private readonly IStateService _stateService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LicensesController"/> class.
         /// </summary>
-        /// <param name="mapper"></param>
-        /// <param name="service"></param>
-        public LicensesController(IMapper mapper, ILicenseService service)
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="accountService">The account service.</param>
+        /// <param name="service">The service.</param>
+        /// <param name="stateService">The state service.</param>
+        public LicensesController(IMapper mapper, IAccountService accountService, 
+            ILicenseService service, IStateService stateService)
         {
             _mapper = mapper;
+            _accountService = accountService;
             _licenseService = service;
+            _stateService = stateService;
         }
 
         /// <summary>
@@ -63,6 +71,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             }
 
             LicenseEditViewModel model = _mapper.Map<LicenseEditViewModel>(license);
+            InstantiateSelectLists(model);
 
             return View(model);
         }
@@ -77,6 +86,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                InstantiateSelectLists(model);
                 return View(model);
             }
 
@@ -121,6 +131,22 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             _licenseService.Verify(license);
 
             return Json(true);
+        }
+
+        private void InstantiateSelectLists(LicenseEditViewModel model)
+        {
+            model.Contractors = new SelectList(
+                _accountService
+                .List()
+                .OrderBy(x => x.LastName).ThenBy(x => x.FirstName)
+                .Select(
+                    x => new { x.ContractorId, Name = $"{x.LastName}, {x.FirstName}"}), 
+                "ContractorId", 
+                "Name", 
+                model.ContractorId
+            );
+
+            model.States = new SelectList(_stateService.List(), "Id", "Name", model.StateId);
         }
     }
 }

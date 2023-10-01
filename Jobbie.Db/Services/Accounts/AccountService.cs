@@ -1,5 +1,6 @@
 ﻿using Jobbie.Db.Models;
 using Jobbie.Db.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jobbie.Db.Services
 {
@@ -28,8 +29,6 @@ namespace Jobbie.Db.Services
 
             return base.Create(entity);
         }
-
-
 
         /// <inheritdoc />
         public Account Verify(Account entity)

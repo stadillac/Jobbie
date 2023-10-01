@@ -15,9 +15,11 @@ namespace Jobbie.Web.Extensions
             services.AddScoped<IDeadlineTypeService, DeadlineTypeService>();
             services.AddScoped<IDocumentService, DocumentService>();
             services.AddScoped<IDisciplineService, DisciplineService>();
+            services.AddScoped<IExpertiseService, ExpertiseService>();
+            services.AddScoped<IFocusService, FocusService>();
+            services.AddScoped<ILicenseService, LicenseService>();
             services.AddScoped<IProfessionDisciplineService, ProfessionDisciplineService>();
             services.AddScoped<IProfessionService, ProfessionService>();
-            services.AddScoped<ILicenseService, LicenseService>();
             services.AddScoped<IProjectDeliverableService, ProjectDeliverableService>();
             services.AddScoped<IReviewService, ReviewService>();
             services.AddScoped<ISoftwareService, SoftwareService>();

@@ -4,6 +4,7 @@ using Jobbie.Db.Services;
 using Jobbie.Web.Extensions;
 using Jobbie.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
 
 namespace Jobbie.Web.Areas.Admin.Controllers
@@ -12,17 +13,20 @@ namespace Jobbie.Web.Areas.Admin.Controllers
     public class SpecialtiesController : Controller
     {
         private readonly IMapper _mapper;
+        private readonly IExpertiseService _expertiseService;
         private readonly ISpecialtyService _specialtyService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SpecialtiesController"/> class.
         /// </summary>
-        /// <param name="mapper"></param>
-        /// <param name="service"></param>
-        public SpecialtiesController(IMapper mapper, ISpecialtyService service)
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="service">The service.</param>
+        /// <param name="expertiseService">The expertise service.</param>
+        public SpecialtiesController(IMapper mapper, ISpecialtyService service, IExpertiseService expertiseService)
         {
             _mapper = mapper;
             _specialtyService = service;
+            _expertiseService = expertiseService;
         }
 
         /// <summary>
@@ -63,6 +67,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             }
 
             SpecialtyEditViewModel model = _mapper.Map<SpecialtyEditViewModel>(specialty);
+            InstantiateSelectLists(model);
 
             return View(model);
         }
@@ -77,7 +82,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //InstantiateSelectLists(model);
+                InstantiateSelectLists(model);
                 return View(model);
             }
 
@@ -108,6 +113,11 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             _specialtyService.Delete(specialty);
 
             return Json(true);
+        }
+
+        private void InstantiateSelectLists(SpecialtyEditViewModel model)
+        {
+            model.Expertises = new SelectList(_expertiseService.List(), "Id", "Name", model.ExpertiseId);
         }
     }
 }

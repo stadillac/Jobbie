@@ -4,6 +4,7 @@ using Jobbie.Db.Services;
 using Jobbie.Web.Extensions;
 using Jobbie.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
 
 namespace Jobbie.Web.Areas.Admin.Controllers
@@ -13,16 +14,19 @@ namespace Jobbie.Web.Areas.Admin.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IExpertiseService _expertiseService;
+        private readonly IFocusService _focusService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpertisesController"/> class.
         /// </summary>
-        /// <param name="mapper"></param>
-        /// <param name="service"></param>
-        public ExpertisesController(IMapper mapper, IExpertiseService service)
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="service">The service.</param>
+        /// <param name="focusService">The focus service.</param>
+        public ExpertisesController(IMapper mapper, IExpertiseService service, IFocusService focusService)
         {
             _mapper = mapper;
             _expertiseService = service;
+            _focusService = focusService;
         }
 
         /// <summary>
@@ -63,6 +67,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             }
 
             ExpertiseEditViewModel model = _mapper.Map<ExpertiseEditViewModel>(expertise);
+            InstantiateSelectLists(model);
 
             return View(model);
         }
@@ -77,7 +82,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //InstantiateSelectLists(model);
+                InstantiateSelectLists(model);
                 return View(model);
             }
 
@@ -108,6 +113,11 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             _expertiseService.Delete(expertise);
 
             return Json(true);
+        }
+
+        private void InstantiateSelectLists(ExpertiseEditViewModel model)
+        {
+            model.Focuses = new SelectList(_focusService.List(), "Id", "Name", model.FocusId);
         }
     }
 }

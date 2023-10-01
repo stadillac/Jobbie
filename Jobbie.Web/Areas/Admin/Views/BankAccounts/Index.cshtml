@@ -37,10 +37,10 @@
                     <tr>
                         <td>@item.BankName</td>
                         <td>
-                            <a href="/BankAccounts/Edit/@item.Id" class="btn btn-primary">Edit</a>
+                            <a href="/Admin/BankAccounts/Edit/@item.Id" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
-                            <a href="javascript:void(0);" class="btn btn-danger" onclick="softDelete('/BankAccounts/Delete', @item.Id, this)">Delete</a>
+                            <a href="javascript:void(0);" class="btn btn-danger" onclick="softDelete('/Admin/BankAccounts/Delete', @item.Id, this)">Delete</a>
                         </td>
                     </tr>
                 }

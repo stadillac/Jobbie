@@ -15,6 +15,22 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
+                    @Html.LabelFor(model => model.ContractorId, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.ContractorId, Model.Contractors, Jobbie.Web.Constants.Constants.EmptySelectOptionText, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ContractorId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StateId, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.StateId, Model.States, Jobbie.Web.Constants.Constants.EmptySelectOptionText, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
                     @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })

@@ -11,11 +11,11 @@ namespace Jobbie.Web.Models
         public int ProfessionDisciplineId { get; set; }
         public AccountEditViewModel? Account { get; set; }
 
-        //public List<LicenseEditViewModel> Licenses { get; set; } = new List<LicenseEditViewModel>(); // TODO
-        //public List<SolicitationContractorViewModel> Solicitations { get; set; } = new List<SolicitationContractorViewModel>(); // TODO
-        public List<SoftwareViewModel> AvailableSoftware { get; set; } = new List<SoftwareViewModel>();
-
         [DisplayName("Profession")]
         public SelectList? ProfessionDisciplines { get; set; }
+
+        public List<LicenseEditViewModel> Licenses { get; set; } = new List<LicenseEditViewModel>(); // TODO
+        public List<SolicitationContractorViewModel> Solicitations { get; set; } = new List<SolicitationContractorViewModel>(); // TODO
+        public List<SoftwareViewModel> AvailableSoftware { get; set; } = new List<SoftwareViewModel>();
     }
 }

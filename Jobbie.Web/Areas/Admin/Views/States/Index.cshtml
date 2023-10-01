@@ -39,10 +39,10 @@
                         <td>@item.Name</td>
                         <td>@item.Abbreviation</td>
                         <td>
-                            <a href="/States/Edit/@item.Id" class="btn btn-primary">Edit</a>
+                            <a href="/Admin/States/Edit/@item.Id" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
-                            <a href="javascript:void(0);" class="btn btn-danger" onclick="softDelete('/States/Delete', @item.Id, this)">Delete</a>
+                            <a href="javascript:void(0);" class="btn btn-danger" onclick="softDelete('/Admin/States/Delete', @item.Id, this)">Delete</a>
                         </td>
                     </tr>
                 }

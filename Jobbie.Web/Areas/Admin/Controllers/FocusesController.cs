@@ -4,6 +4,7 @@ using Jobbie.Db.Services;
 using Jobbie.Web.Extensions;
 using Jobbie.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
 
 namespace Jobbie.Web.Areas.Admin.Controllers
@@ -12,16 +13,19 @@ namespace Jobbie.Web.Areas.Admin.Controllers
     public class FocusesController : Controller
     {
         private readonly IMapper _mapper;
+        private readonly IDisciplineService _disciplineService;
         private readonly IFocusService _focusService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FocussController"/> class.
+        /// Initializes a new instance of the <see cref="FocusesController"/> class.
         /// </summary>
-        /// <param name="mapper"></param>
-        /// <param name="service"></param>
-        public FocusesController(IMapper mapper, IFocusService service)
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="disciplineService">The discipline service.</param>
+        /// <param name="service">The service.</param>
+        public FocusesController(IMapper mapper, IDisciplineService disciplineService, IFocusService service)
         {
             _mapper = mapper;
+            _disciplineService = disciplineService;
             _focusService = service;
         }
 
@@ -63,6 +67,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             }
 
             FocusEditViewModel model = _mapper.Map<FocusEditViewModel>(focus);
+            InstantiateSelectLists(model);
 
             return View(model);
         }
@@ -77,7 +82,7 @@ namespace Jobbie.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //InstantiateSelectLists(model);
+                InstantiateSelectLists(model);
                 return View(model);
             }
 
@@ -108,6 +113,11 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             _focusService.Delete(focus);
 
             return Json(true);
+        }
+
+        private void InstantiateSelectLists(FocusEditViewModel model)
+        {
+            model.Disciplines = new SelectList(_disciplineService.List(), "Id", "Name", model.DisciplineId);
         }
     }
 }
