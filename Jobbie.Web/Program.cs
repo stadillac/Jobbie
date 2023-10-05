@@ -13,11 +13,11 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );
-builder.Services.AddDbContext<UserContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")
-    )
-);
+//builder.Services.AddDbContext<UserContext>(options =>
+//    options.UseSqlServer(
+//        builder.Configuration.GetConnectionString("DefaultConnection")
+//    )
+//);
 builder.Services.RegisterServices();
 
 builder.Services.AddDefaultIdentity<IdentityUser>
@@ -31,7 +31,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>
         options.Password.RequireUppercase = false;
         options.Password.RequireLowercase = false;
     })
-    .AddEntityFrameworkStores<UserContext>();
+    .AddEntityFrameworkStores<ApplicationContext>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddHttpContextAccessor();

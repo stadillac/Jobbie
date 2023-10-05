@@ -10,7 +10,7 @@ namespace Jobbie.Web.Extensions
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<UserContext>()
+                .AddEntityFrameworkStores<ApplicationContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
 

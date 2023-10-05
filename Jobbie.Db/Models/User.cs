@@ -8,8 +8,8 @@ namespace Jobbie.Db.Models
     /// but can also have a solicitor record. I.E a user must be a contractor,
     /// but can also hire/create jobs.
     /// </summary>
-    /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
-    public class User : IdentityUser
+    /// <seealso cref="Jobbie.Db.Models.IdentityUser" />
+    public class User : IdentityUser<int>
     {
         /// <summary>
         /// Gets or sets the created date.
@@ -90,14 +90,6 @@ namespace Jobbie.Db.Models
         /// The last name.
         /// </value>
         public string LastName { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Gets or sets the username.
-        /// </summary>
-        /// <value>
-        /// The username.
-        /// </value>
-        public string Username { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the about me.

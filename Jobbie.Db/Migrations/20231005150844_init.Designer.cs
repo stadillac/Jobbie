@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Jobbie.Db.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230927230904_adding_name_field_to_two_entities_removing_has_specialty_from_discipline")]
-    partial class adding_name_field_to_two_entities_removing_has_specialty_from_discipline
+    [Migration("20231005150844_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,111 +24,6 @@ namespace Jobbie.Db.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Jobbie.Db.Models.Account", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AboutMe")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BankAccountId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CompanyTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ContractorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CurrentWorkload")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmployerIdentificationNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("HoursAvailablePerWeek")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsVerified")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SocialSecurityNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SolicitorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId")
-                        .IsUnique();
-
-                    b.HasIndex("BankAccountId")
-                        .IsUnique();
-
-                    b.HasIndex("CompanyTypeId");
-
-                    b.HasIndex("ContractorId")
-                        .IsUnique();
-
-                    b.HasIndex("SolicitorId")
-                        .IsUnique()
-                        .HasFilter("[SolicitorId] IS NOT NULL");
-
-                    b.ToTable("Accounts");
-                });
 
             modelBuilder.Entity("Jobbie.Db.Models.Address", b =>
                 {
@@ -143,7 +38,6 @@ namespace Jobbie.Db.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Address2")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
@@ -419,9 +313,6 @@ namespace Jobbie.Db.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -446,9 +337,12 @@ namespace Jobbie.Db.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Documents");
                 });
@@ -738,7 +632,7 @@ namespace Jobbie.Db.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ContractorAccountId")
+                    b.Property<int?>("ContractorUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
@@ -771,16 +665,16 @@ namespace Jobbie.Db.Migrations
                     b.Property<int>("SolicitationRoleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SolicitorAccountId")
+                    b.Property<int?>("SolicitorUserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContractorAccountId");
+                    b.HasIndex("ContractorUserId");
 
                     b.HasIndex("SolicitationRoleId");
 
-                    b.HasIndex("SolicitorAccountId");
+                    b.HasIndex("SolicitorUserId");
 
                     b.ToTable("Reviews");
                 });
@@ -890,9 +784,8 @@ namespace Jobbie.Db.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("TeamMeetingTime")
                         .HasColumnType("datetime2");
@@ -1255,7 +1148,12 @@ namespace Jobbie.Db.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SolicitationId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SolicitationId");
 
                     b.ToTable("States");
                 });
@@ -1304,45 +1202,281 @@ namespace Jobbie.Db.Migrations
                     b.ToTable("StatusUpdates");
                 });
 
-            modelBuilder.Entity("Jobbie.Db.Models.Account", b =>
+            modelBuilder.Entity("Jobbie.Db.Models.User", b =>
                 {
-                    b.HasOne("Jobbie.Db.Models.Address", "Address")
-                        .WithOne()
-                        .HasForeignKey("Jobbie.Db.Models.Account", "AddressId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("Jobbie.Db.Models.BankAccount", "BankAccount")
-                        .WithOne()
-                        .HasForeignKey("Jobbie.Db.Models.Account", "BankAccountId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.HasOne("Jobbie.Db.Models.CompanyType", "CompanyType")
-                        .WithMany()
-                        .HasForeignKey("CompanyTypeId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                    b.Property<string>("AboutMe")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasOne("Jobbie.Db.Models.Contractor", "Contractor")
-                        .WithOne("Account")
-                        .HasForeignKey("Jobbie.Db.Models.Account", "ContractorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
 
-                    b.HasOne("Jobbie.Db.Models.Solicitor", "Solicitor")
-                        .WithOne("Account")
-                        .HasForeignKey("Jobbie.Db.Models.Account", "SolicitorId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
 
-                    b.Navigation("Address");
+                    b.Property<int>("BankAccountId")
+                        .HasColumnType("int");
 
-                    b.Navigation("BankAccount");
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Navigation("CompanyType");
+                    b.Property<int?>("CompanyTypeId")
+                        .HasColumnType("int");
 
-                    b.Navigation("Contractor");
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Navigation("Solicitor");
+                    b.Property<int>("ContractorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CurrentWorkload")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("EmployerIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HoursAvailablePerWeek")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SocialSecurityNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SolicitorId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId")
+                        .IsUnique();
+
+                    b.HasIndex("BankAccountId")
+                        .IsUnique();
+
+                    b.HasIndex("CompanyTypeId");
+
+                    b.HasIndex("ContractorId")
+                        .IsUnique();
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("SolicitorId")
+                        .IsUnique()
+                        .HasFilter("[SolicitorId] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Jobbie.Db.Models.Address", b =>
@@ -1388,13 +1522,13 @@ namespace Jobbie.Db.Migrations
 
             modelBuilder.Entity("Jobbie.Db.Models.Document", b =>
                 {
-                    b.HasOne("Jobbie.Db.Models.Account", "Account")
+                    b.HasOne("Jobbie.Db.Models.User", "User")
                         .WithMany("Documents")
-                        .HasForeignKey("AccountId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Account");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Jobbie.Db.Models.Expertise", b =>
@@ -1459,9 +1593,9 @@ namespace Jobbie.Db.Migrations
 
             modelBuilder.Entity("Jobbie.Db.Models.Review", b =>
                 {
-                    b.HasOne("Jobbie.Db.Models.Account", "ContractorAccount")
+                    b.HasOne("Jobbie.Db.Models.User", "ContractorUser")
                         .WithMany("ContractorReviews")
-                        .HasForeignKey("ContractorAccountId")
+                        .HasForeignKey("ContractorUserId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Jobbie.Db.Models.SolicitationRole", null)
@@ -1470,14 +1604,14 @@ namespace Jobbie.Db.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Jobbie.Db.Models.Account", "SolicitorAccount")
+                    b.HasOne("Jobbie.Db.Models.User", "SolicitorUser")
                         .WithMany("SolicitorReviews")
-                        .HasForeignKey("SolicitorAccountId")
+                        .HasForeignKey("SolicitorUserId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("ContractorAccount");
+                    b.Navigation("ContractorUser");
 
-                    b.Navigation("SolicitorAccount");
+                    b.Navigation("SolicitorUser");
                 });
 
             modelBuilder.Entity("Jobbie.Db.Models.Solicitation", b =>
@@ -1605,6 +1739,13 @@ namespace Jobbie.Db.Migrations
                     b.Navigation("Expertise");
                 });
 
+            modelBuilder.Entity("Jobbie.Db.Models.State", b =>
+                {
+                    b.HasOne("Jobbie.Db.Models.Solicitation", null)
+                        .WithMany("States")
+                        .HasForeignKey("SolicitationId");
+                });
+
             modelBuilder.Entity("Jobbie.Db.Models.StatusUpdate", b =>
                 {
                     b.HasOne("Jobbie.Db.Models.SolicitationContractor", "Contractor")
@@ -1622,24 +1763,107 @@ namespace Jobbie.Db.Migrations
                     b.Navigation("Solicitor");
                 });
 
-            modelBuilder.Entity("Jobbie.Db.Models.Account", b =>
+            modelBuilder.Entity("Jobbie.Db.Models.User", b =>
                 {
-                    b.Navigation("ContractorReviews");
+                    b.HasOne("Jobbie.Db.Models.Address", "Address")
+                        .WithOne()
+                        .HasForeignKey("Jobbie.Db.Models.User", "AddressId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
-                    b.Navigation("Documents");
+                    b.HasOne("Jobbie.Db.Models.BankAccount", "BankAccount")
+                        .WithOne()
+                        .HasForeignKey("Jobbie.Db.Models.User", "BankAccountId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
-                    b.Navigation("SolicitorReviews");
+                    b.HasOne("Jobbie.Db.Models.CompanyType", "CompanyType")
+                        .WithMany()
+                        .HasForeignKey("CompanyTypeId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Jobbie.Db.Models.Contractor", "Contractor")
+                        .WithOne("User")
+                        .HasForeignKey("Jobbie.Db.Models.User", "ContractorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Jobbie.Db.Models.Solicitor", "Solicitor")
+                        .WithOne("User")
+                        .HasForeignKey("Jobbie.Db.Models.User", "SolicitorId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Address");
+
+                    b.Navigation("BankAccount");
+
+                    b.Navigation("CompanyType");
+
+                    b.Navigation("Contractor");
+
+                    b.Navigation("Solicitor");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.HasOne("Jobbie.Db.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.HasOne("Jobbie.Db.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Jobbie.Db.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.HasOne("Jobbie.Db.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Jobbie.Db.Models.Contractor", b =>
                 {
-                    b.Navigation("Account");
-
                     b.Navigation("AvailableSoftware");
 
                     b.Navigation("Licenses");
 
                     b.Navigation("Solicitations");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Jobbie.Db.Models.Discipline", b =>
@@ -1676,6 +1900,8 @@ namespace Jobbie.Db.Migrations
                     b.Navigation("Deadline");
 
                     b.Navigation("Roles");
+
+                    b.Navigation("States");
                 });
 
             modelBuilder.Entity("Jobbie.Db.Models.SolicitationContractor", b =>
@@ -1694,11 +1920,20 @@ namespace Jobbie.Db.Migrations
 
             modelBuilder.Entity("Jobbie.Db.Models.Solicitor", b =>
                 {
-                    b.Navigation("Account");
-
                     b.Navigation("Solicitations");
 
                     b.Navigation("StatusUpdates");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Jobbie.Db.Models.User", b =>
+                {
+                    b.Navigation("ContractorReviews");
+
+                    b.Navigation("Documents");
+
+                    b.Navigation("SolicitorReviews");
                 });
 #pragma warning restore 612, 618
         }

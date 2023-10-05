@@ -1,13 +1,52 @@
 ﻿using Jobbie.Db.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jobbie.Db.Extensions
 {
     internal static class ModelBuilderExtension
     {
-        public static void DefineUserRelationships(this ModelBuilder modelBuilder) 
+        public static void CustomizeUserTableNames(this ModelBuilder modelBuilder) 
         {
-            #region Account
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable(name: "User");
+            });
+
+            modelBuilder.Entity<IdentityRole>(entity =>
+            {
+                entity.ToTable(name: "Role");
+            });
+
+            modelBuilder.Entity<IdentityUserRole<int>>(entity =>
+            {
+                entity.ToTable("UserRoles");
+            });
+
+            modelBuilder.Entity<IdentityUserClaim<int>>(entity =>
+            {
+                entity.ToTable("UserClaims");
+            });
+
+            modelBuilder.Entity<IdentityUserLogin<int>>(entity =>
+            {
+                entity.ToTable("UserLogins");
+            });
+
+            modelBuilder.Entity<IdentityRoleClaim<int>>(entity =>
+            {
+                entity.ToTable("RoleClaims");
+            });
+
+            modelBuilder.Entity<IdentityUserToken<int>>(entity =>
+            {
+                entity.ToTable("UserTokens");
+            });
+        }
+
+        public static void DefineRelationships(this ModelBuilder modelBuilder)
+        {
+            #region User
             modelBuilder.Entity<User>()
                 .HasOne(x => x.Address)
                 .WithOne()
@@ -45,10 +84,6 @@ namespace Jobbie.Db.Extensions
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
-        }
-
-        public static void DefineRelationships(this ModelBuilder modelBuilder)
-        {
 
             #region Address
 

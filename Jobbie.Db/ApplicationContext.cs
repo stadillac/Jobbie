@@ -1,12 +1,14 @@
 ﻿using Jobbie.Db.Extensions;
 using Jobbie.Db.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Jobbie.Db
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         private readonly IHttpContextAccessor? _httpContextAccessor;
 
@@ -17,7 +19,8 @@ namespace Jobbie.Db
             _httpContextAccessor = httpContextAccessor;
         }
 
-        //public DbSet<Account> Accounts { get; set; }
+        #region dbsets
+
         public DbSet<Address> Addresses { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<CompanyType> CompanyTypes { get; set; }
@@ -45,7 +48,9 @@ namespace Jobbie.Db
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<StatusUpdate> StatusUpdates { get; set; }
-        
+
+        #endregion
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // TODO: Set up connection string in appsettings
@@ -55,6 +60,8 @@ namespace Jobbie.Db
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.DefineRelationships();
+            modelBuilder.CustomizeUserTableNames();
+            base.OnModelCreating(modelBuilder);
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

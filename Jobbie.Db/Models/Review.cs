@@ -13,7 +13,7 @@
         /// The account identifier.
         /// </value>
         /// <remarks>This relates to the account the review is for.</remarks>
-        public string? ContractorAccountId { get; set; }
+        public int? ContractorUserId { get; set; }
 
         /// <summary>
         /// Gets or sets the solicitor account identifier.
@@ -21,7 +21,7 @@
         /// <value>
         /// The solicitor account identifier.
         /// </value>
-        public string? SolicitorAccountId { get; set; }
+        public int? SolicitorUserId { get; set; }
 
         /// <summary>
         /// Gets or sets the reviewer identifier.
