@@ -5,13 +5,13 @@
         <span class="navbar-text">Signed in as @User.Identity.Name</span>
     </li>
     <li class="nav-item px-2">
-        <button type="button" class="btn btn-link" asp-area="MicrosoftIdentity" asp-controller="Home" asp-action="SignOut">Sign out</button>
+            <button type="button" class="btn btn-link" asp-area="Identity" asp-controller="Home" asp-action="SignOut">Sign out</button>
     </li>
 }
 else
 {
     <li class="nav-item px-2">
-        <a class="nav-link" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Sign in</a>
+        <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login">Sign in</a>
     </li>
 }
 </ul>
