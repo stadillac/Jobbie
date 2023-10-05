@@ -17,7 +17,7 @@ namespace Jobbie.Db
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public DbSet<Account> Accounts { get; set; }
+        //public DbSet<Account> Accounts { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<CompanyType> CompanyTypes { get; set; }

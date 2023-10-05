@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.ObjectModel;
 
 namespace Jobbie.Db.Models
 {
@@ -8,8 +9,40 @@ namespace Jobbie.Db.Models
     /// but can also hire/create jobs.
     /// </summary>
     /// <seealso cref="Jobbie.Db.Models.BaseEntity" />
-    public class Account : BaseEntity
+    public class User : IdentityUser
     {
+        /// <summary>
+        /// Gets or sets the created date.
+        /// </summary>
+        /// <value>
+        /// The created date.
+        /// </value>
+        public DateTime CreatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets who modified the record.
+        /// </summary>
+        /// <value>
+        /// The user who last modified the record.
+        /// </value>
+        public string ModifiedBy { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the modified date.
+        /// </summary>
+        /// <value>
+        /// The modified date.
+        /// </value>
+        public DateTime ModifiedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is deleted.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is deleted; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDeleted { get; set; }
+
         /// <summary>
         /// Gets or sets the contractor identifier.
         /// </summary>
@@ -59,14 +92,6 @@ namespace Jobbie.Db.Models
         public string LastName { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the email.
-        /// </summary>
-        /// <value>
-        /// The email.
-        /// </value>
-        public string Email { get; set; } = string.Empty;
-
-        /// <summary>
         /// Gets or sets the username.
         /// </summary>
         /// <value>
@@ -81,14 +106,6 @@ namespace Jobbie.Db.Models
         /// The about me.
         /// </value>
         public string AboutMe { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Gets or sets the phone number.
-        /// </summary>
-        /// <value>
-        /// The phone number.
-        /// </value>
-        public string PhoneNumber { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the name of the company.

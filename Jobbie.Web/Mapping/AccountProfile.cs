@@ -8,8 +8,8 @@ namespace Jobbie.Web.Mapping
     {
         public AccountProfile()
         {
-            CreateMap<Account, AccountViewModel>().ReverseMap();
-            CreateMap<Account, AccountEditViewModel>().ReverseMap();
+            CreateMap<User, AccountViewModel>().ReverseMap();
+            CreateMap<User, AccountEditViewModel>().ReverseMap();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Jobbie.Db.Models
         /// <value>
         /// The account.
         /// </value>
-        public virtual Account? Account { get; set; }
+        public virtual User? User { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the licenses.

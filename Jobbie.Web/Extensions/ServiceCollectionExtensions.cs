@@ -1,4 +1,7 @@
-﻿using Jobbie.Db.Services;
+﻿using Jobbie.Db;
+using Jobbie.Db.Models;
+using Jobbie.Db.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace Jobbie.Web.Extensions
 {
@@ -6,6 +9,11 @@ namespace Jobbie.Web.Extensions
     {
         public static void RegisterServices(this IServiceCollection services)
         {
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<UserContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
+
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IBankAccountService, BankAccountService>();

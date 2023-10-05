@@ -5,46 +5,50 @@ namespace Jobbie.Db.Extensions
 {
     internal static class ModelBuilderExtension
     {
-        public static void DefineRelationships(this ModelBuilder modelBuilder)
+        public static void DefineUserRelationships(this ModelBuilder modelBuilder) 
         {
             #region Account
-            modelBuilder.Entity<Account>()
+            modelBuilder.Entity<User>()
                 .HasOne(x => x.Address)
                 .WithOne()
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Account>()
+            modelBuilder.Entity<User>()
                 .HasOne(x => x.Contractor)
-                .WithOne(x => x.Account)
+                .WithOne(x => x.User)
                 .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
 
-            modelBuilder.Entity<Account>()
+            modelBuilder.Entity<User>()
                 .HasOne(x => x.Solicitor)
-                .WithOne(x => x.Account)
+                .WithOne(x => x.User)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Account>()
+            modelBuilder.Entity<User>()
                 .HasOne(x => x.BankAccount)
                 .WithOne()
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Account>()
+            modelBuilder.Entity<User>()
                 .HasOne(x => x.CompanyType)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Account>()
+            modelBuilder.Entity<User>()
                 .HasMany(x => x.ContractorReviews)
-                .WithOne(x => x.ContractorAccount)
+                .WithOne(x => x.ContractorUser)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Account>()
+            modelBuilder.Entity<User>()
                 .HasMany(x => x.SolicitorReviews)
-                .WithOne(x => x.SolicitorAccount)
+                .WithOne(x => x.SolicitorUser)
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
+        }
+
+        public static void DefineRelationships(this ModelBuilder modelBuilder)
+        {
 
             #region Address
 
@@ -86,7 +90,7 @@ namespace Jobbie.Db.Extensions
             #region Document
 
             modelBuilder.Entity<Document>()
-                .HasOne(x => x.Account)
+                .HasOne(x => x.User)
                 .WithMany(x => x.Documents)
                 .OnDelete(DeleteBehavior.NoAction);
 
@@ -122,12 +126,12 @@ namespace Jobbie.Db.Extensions
             #region Review 
 
             modelBuilder.Entity<Review>()
-                .HasOne(x => x.ContractorAccount) 
+                .HasOne(x => x.ContractorUser) 
                 .WithMany(x => x.ContractorReviews)
                 .OnDelete(DeleteBehavior.NoAction);
             
             modelBuilder.Entity<Review>()
-                .HasOne(x => x.SolicitorAccount) 
+                .HasOne(x => x.SolicitorUser) 
                 .WithMany(x => x.SolicitorReviews)
                 .OnDelete(DeleteBehavior.NoAction);
 

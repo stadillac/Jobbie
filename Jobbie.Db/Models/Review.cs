@@ -13,7 +13,7 @@
         /// The account identifier.
         /// </value>
         /// <remarks>This relates to the account the review is for.</remarks>
-        public int? ContractorAccountId { get; set; }
+        public string? ContractorAccountId { get; set; }
 
         /// <summary>
         /// Gets or sets the solicitor account identifier.
@@ -21,7 +21,7 @@
         /// <value>
         /// The solicitor account identifier.
         /// </value>
-        public int? SolicitorAccountId { get; set; }
+        public string? SolicitorAccountId { get; set; }
 
         /// <summary>
         /// Gets or sets the reviewer identifier.
@@ -64,7 +64,7 @@
         /// <value>
         /// The account.
         /// </value>
-        public virtual Account? ContractorAccount { get; set; }
+        public virtual User? ContractorUser { get; set; }
 
         /// <summary>
         /// Navigational property. Gets or sets the solicitor account.
@@ -72,6 +72,6 @@
         /// <value>
         /// The solicitor account.
         /// </value>
-        public virtual Account? SolicitorAccount { get; set; }
+        public virtual User? SolicitorUser { get; set; }
     }
 }
