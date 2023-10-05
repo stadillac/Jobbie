@@ -9,13 +9,15 @@ using Microsoft.Extensions.Logging;
 
 namespace Jobbie.Web.Areas.Identity.Pages.Account.Manage
 {
+    using Jobbie.Db.Models;
+
     public class PersonalDataModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
 
         public PersonalDataModel(
-            UserManager<IdentityUser> userManager,
+            UserManager<User> userManager,
             ILogger<PersonalDataModel> logger)
         {
             _userManager = userManager;

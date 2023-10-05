@@ -11,14 +11,16 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Jobbie.Web.Areas.Identity.Pages.Account.Manage
 {
+    using Jobbie.Db.Models;
+
     public class SetPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
         public SetPasswordModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<User> userManager,
+            SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

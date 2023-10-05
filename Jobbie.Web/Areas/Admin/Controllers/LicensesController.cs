@@ -135,16 +135,16 @@ namespace Jobbie.Web.Areas.Admin.Controllers
 
         private void InstantiateSelectLists(LicenseEditViewModel model)
         {
-            model.Contractors = new SelectList(
-                _accountService
-                .List()
-                .OrderBy(x => x.LastName).ThenBy(x => x.FirstName)
-                .Select(
-                    x => new { x.ContractorId, Name = $"{x.LastName}, {x.FirstName}"}), 
-                "ContractorId", 
-                "Name", 
-                model.ContractorId
-            );
+            //model.Contractors = new SelectList(
+            //    _accountService
+            //    .List()
+            //    .OrderBy(x => x.LastName).ThenBy(x => x.FirstName)
+            //    .Select(
+            //        x => new { x.ContractorId, Name = $"{x.LastName}, {x.FirstName}"}), 
+            //    "ContractorId", 
+            //    "Name", 
+            //    model.ContractorId
+            //);
 
             model.States = new SelectList(_stateService.List(), "Id", "Name", model.StateId);
         }

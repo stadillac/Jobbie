@@ -36,112 +36,112 @@ namespace Jobbie.Web.Areas.Admin.Controllers
             _stateService = stateService;
         }
 
-        /// <summary>
-        /// Indexes the specified page.
-        /// </summary>
-        /// <param name="page">The page.</param>
-        /// <returns></returns>
-        public IActionResult Index(int? page)
-        {
-            IEnumerable<Account> accounts = _accountService.List();
+        ///// <summary>
+        ///// Indexes the specified page.
+        ///// </summary>
+        ///// <param name="page">The page.</param>
+        ///// <returns></returns>
+        //public IActionResult Index(int? page)
+        //{
+        //    IEnumerable<Account> accounts = _accountService.List();
 
-            IPagedList<AccountViewModel> accountViewModels = accounts
-                .ToPagedList(page ?? 1, Constants.Constants.PageSize)
-                .Map<Account, AccountViewModel>(_mapper);
+        //    IPagedList<AccountViewModel> accountViewModels = accounts
+        //        .ToPagedList(page ?? 1, Constants.Constants.PageSize)
+        //        .Map<Account, AccountViewModel>(_mapper);
 
-            AccountIndexViewModel model = new AccountIndexViewModel
-            {
-                Accounts = accountViewModels
-            };
+        //    AccountIndexViewModel model = new AccountIndexViewModel
+        //    {
+        //        Accounts = accountViewModels
+        //    };
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
-        /// <summary>
-        /// Edits the specified identifier.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
-        public IActionResult Edit(int? id)
-        {
-            Account? account = id.HasValue
-                ? _accountService.Get(x => x.Id == id.Value)
-                : new Account();
+        ///// <summary>
+        ///// Edits the specified identifier.
+        ///// </summary>
+        ///// <param name="id">The identifier.</param>
+        ///// <returns></returns>
+        //public IActionResult Edit(int? id)
+        //{
+        //    Account? account = id.HasValue
+        //        ? _accountService.Get(x => x.Id == id.Value)
+        //        : new Account();
 
-            if (account == null)
-            {
-                return RedirectToAction("Index");
-            }
+        //    if (account == null)
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
 
-            AccountEditViewModel model = _mapper.Map<AccountEditViewModel>(account);
-            InstantiateRelatedModels(model);
-            InstantiateSelectLists(model);
+        //    AccountEditViewModel model = _mapper.Map<AccountEditViewModel>(account);
+        //    InstantiateRelatedModels(model);
+        //    InstantiateSelectLists(model);
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
-        /// <summary>
-        /// Edits the specified model.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns></returns>
-        [HttpPost]
-        public IActionResult Edit(AccountEditViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                InstantiateRelatedModels(model);
-                InstantiateSelectLists(model);
-                return View(model);
-            }
+        ///// <summary>
+        ///// Edits the specified model.
+        ///// </summary>
+        ///// <param name="model">The model.</param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //public IActionResult Edit(AccountEditViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        InstantiateRelatedModels(model);
+        //        InstantiateSelectLists(model);
+        //        return View(model);
+        //    }
 
-            if (model.IsSolicitor && model.SolicitorId == null)
-            {
-                model.Solicitor = new();
-            }
+        //    if (model.IsSolicitor && model.SolicitorId == null)
+        //    {
+        //        model.Solicitor = new();
+        //    }
 
-            if (model.Id != 0)
-            {
-                Account? account = _accountService.Get(x => x.Id == model.Id);
-                _mapper.Map(model, account);
-                _accountService.Update(account);
-            }
-            else
-            {
-                Account account = _mapper.Map<Account>(model);
-                _accountService.Create(account);
-            }
+        //    if (model.Id != 0)
+        //    {
+        //        Account? account = _accountService.Get(x => x.Id == model.Id);
+        //        _mapper.Map(model, account);
+        //        _accountService.Update(account);
+        //    }
+        //    else
+        //    {
+        //        Account account = _mapper.Map<Account>(model);
+        //        _accountService.Create(account);
+        //    }
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
 
-        public JsonResult Delete(int id)
-        {
-            Account? account = _accountService.Get(x => x.Id == id);
+        //public JsonResult Delete(int id)
+        //{
+        //    Account? account = _accountService.Get(x => x.Id == id);
 
-            if (account == null)
-            {
-                return Json(false);
-            }
+        //    if (account == null)
+        //    {
+        //        return Json(false);
+        //    }
 
-            _accountService.Delete(account);
+        //    _accountService.Delete(account);
 
-            return Json(true);
-        }
+        //    return Json(true);
+        //}
 
-        public JsonResult Verify(int id)
-        {
-            Account? account = _accountService.Get(x => x.Id == id);
+        //public JsonResult Verify(int id)
+        //{
+        //    Account? account = _accountService.Get(x => x.Id == id);
 
-            if (account == null)
-            {
-                return Json(false);
-            }
+        //    if (account == null)
+        //    {
+        //        return Json(false);
+        //    }
 
-            _accountService.Verify(account);
+        //    _accountService.Verify(account);
 
-            return Json(true);
-        }
+        //    return Json(true);
+        //}
 
         private void InstantiateRelatedModels(AccountEditViewModel model)
         {

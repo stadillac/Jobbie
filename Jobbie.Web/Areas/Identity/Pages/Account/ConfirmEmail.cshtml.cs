@@ -14,11 +14,13 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace Jobbie.Web.Areas.Identity.Pages.Account
 {
+    using Jobbie.Db.Models;
+
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
 
-        public ConfirmEmailModel(UserManager<IdentityUser> userManager)
+        public ConfirmEmailModel(UserManager<User> userManager)
         {
             _userManager = userManager;
         }
