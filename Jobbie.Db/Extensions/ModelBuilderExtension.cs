@@ -8,12 +8,16 @@ namespace Jobbie.Db.Extensions
     {
         public static void CustomizeUserTableNames(this ModelBuilder modelBuilder) 
         {
+            //this isnt working and its pissing me off. So leaving it for now.
+            // its just to change the default table names for identity models, so not super
+            // important. come back to this when you get a chance.
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable(name: "User");
             });
 
-            modelBuilder.Entity<IdentityRole>(entity =>
+            modelBuilder.Entity<IdentityRole<int>>(entity =>
             {
                 entity.ToTable(name: "Role");
             });
